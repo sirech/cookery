@@ -43,6 +43,8 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     ffi (1.9.0)
+    foreigner (1.4.2)
+      activerecord (>= 3.0.0)
     formatador (0.2.4)
     guard (1.8.1)
       formatador (>= 0.2.4)
@@ -168,6 +170,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  foreigner
   guard
   guard-bundler
   guard-rails
