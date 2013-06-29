@@ -22,6 +22,13 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'growl_notify'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
