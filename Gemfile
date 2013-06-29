@@ -22,11 +22,18 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+# Guard
 group :development do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rails'
+  gem 'guard-rspec'
   gem 'growl_notify'
+end
+
+# Testing
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
 end
 
 # Use ActiveModel has_secure_password
