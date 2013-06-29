@@ -29,7 +29,6 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'growl_notify'
 end
 
 # Testing
