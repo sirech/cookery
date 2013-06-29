@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 gem 'sqlite3'
 
 # Frontend
+gem 'bootstrap-sass'
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'
