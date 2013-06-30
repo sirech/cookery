@@ -12,5 +12,7 @@
   = f.label :difficulty
   = f.select :difficulty, options_for_select(Recipe.difficulty_levels)
 
+  = text_field_tag 'category'
+
   .actions
     = f.submit 'Save'

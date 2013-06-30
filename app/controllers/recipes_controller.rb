@@ -25,6 +25,7 @@ class RecipesController < ApplicationController
   # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+    add_category params[:category]
 
     respond_to do |format|
       if @recipe.save
@@ -38,6 +39,8 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
+    add_category params[:category]
+
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
@@ -57,12 +60,20 @@ class RecipesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
 
-    def recipe_params
-      params.require(:recipe).permit(:name, :difficulty)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def recipe_params
+    params.require(:recipe).permit(:name, :difficulty)
+  end
+
+  def add_category(category)
+    if category
+      tag = Category.find_by_name(category) || Category.create(name: category)
+      @recipe.categories << tag
     end
+  end
 end
