@@ -39,4 +39,15 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # Required by closure_tree to run tests with sqlite
+  config.before(:all) do
+    ENV['FLOCK_DIR'] = Dir.mktmpdir
+  end
+
+  config.after(:all) do
+    FileUtils.remove_entry_secure ENV['FLOCK_DIR']
+  end
 end
+
+

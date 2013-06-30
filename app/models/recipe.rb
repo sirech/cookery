@@ -3,7 +3,7 @@ class Recipe < ActiveRecord::Base
   include Named
 
   has_and_belongs_to_many :categories
-  has_one :first_step
+  has_one :first_step, class_name: 'Step'
 
   # Difficulty
   DIFFICULTY_LEVELS = %w(easy medium difficult).freeze
