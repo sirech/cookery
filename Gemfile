@@ -15,8 +15,13 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
+# DB
+
 # Add foreign keys in migrations
 gem 'foreigner'
+
+# Add tree hierarchy to a model
+gem 'closure_tree'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
