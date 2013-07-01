@@ -12,9 +12,26 @@
   = f.label :difficulty
   = f.select :difficulty, options_for_select(Recipe.difficulty_levels)
 
+  %hr
+
+  = f.label :category, 'Add a category'
   = text_field_tag 'category'
 
+  %hr
+
+  = f.label :picture, 'Choose a picture'
   = f.file_field :picture
+
+  %hr
+
+  %p Step
+
+  = fields_for :first_step do |step_form|
+    = step_form.label :name
+    = step_form.text_field :name
+
+    = step_form.label :duration
+    = step_form.text_field :duration
 
   .actions
     = f.submit 'Save'
