@@ -63,6 +63,8 @@ GEM
     guard-bundler (1.0.0)
       bundler (~> 1.0)
       guard (~> 1.1)
+    guard-ctags-bundler (0.1.6)
+      guard (>= 1.1)
     guard-rails (0.4.4)
       guard (>= 0.2.2)
     guard-rspec (3.0.2)
@@ -185,6 +187,7 @@ DEPENDENCIES
   foreigner
   guard
   guard-bundler
+  guard-ctags-bundler
   guard-rails
   guard-rspec
   haml

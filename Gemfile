@@ -35,8 +35,10 @@ end
 group :development do
   gem 'guard'
   gem 'guard-bundler'
+  gem 'guard-ctags-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
 end
 
 # Testing

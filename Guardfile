@@ -1,13 +1,20 @@
-ignore %r{^ignored/path/}, /public/
-filter /\.txt$/, /.*\.zip/
+# -*- mode: ruby;-*-
+ignore /public/
+# This breaks the whole thing for some reason
+#filter /\.txt$/, /\.zip$/
 
-guard 'bundler' do
+guard 'ctags-bundler', :emacs => true, :src_path => %w(app lib spec) do
+  watch(/^(app|lib|spec)\/.*\.rb$/)
+  watch('Gemfile.lock')
+end
+
+guard :bundler do
   watch('Gemfile')
   # Uncomment next line if Gemfile contain `gemspec' command
   # watch(/^.+\.gemspec/)
 end
 
-guard 'rails' do
+guard :rails do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end

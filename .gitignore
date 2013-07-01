@@ -17,3 +17,5 @@
 
 # Ignore tags files
 TAGS
+gems.tags
+tags
