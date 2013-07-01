@@ -22,5 +22,8 @@ module Cookery
 
     # Use SASS
     config.sass.preferred_syntax = :sass
+
+    # Rails 4 does not compile images in vendor/lib
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end

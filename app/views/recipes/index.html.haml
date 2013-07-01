@@ -1,25 +1,26 @@
-%h1 Listing recipes
+%div.well
+  %div.container
+    %div.row
+      %div.span12
+        %h1 Listing recipes
 
-%table
-  %tr
-    %th Picture
-    %th Name
-    %th Difficulty
-    %th
-    %th
-    %th
+= paginate @recipes
+= page_entries_info @recipes
 
-  - @recipes.each do |recipe|
-    %tr
-      %td= image_tag recipe.picture.url(:thumb)
-      %td= recipe.name
-      %td= recipe.difficulty
-      %td= link_to 'Show', recipe
-      %td= link_to 'Edit', edit_recipe_path(recipe)
-      %td= link_to 'Destroy', recipe, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%div.container
+  %div#portfolio.row
 
-  = paginate @recipes
-  = page_entries_info @recipes
+    - @recipes.each do |recipe|
+      %div.span3.box
+        %div.thumbnail
+          = image_tag recipe.picture.url(:medium)
+          %div.caption
+            %p= recipe.name
+            %p= recipe.difficulty
+            %div.row-fluid
+              %div.span4= link_to 'Show', recipe
+              %div.span4= link_to 'Edit', edit_recipe_path(recipe)
+              %div.span4= link_to 'Destroy', recipe, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
