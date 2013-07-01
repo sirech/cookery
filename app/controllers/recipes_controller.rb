@@ -62,7 +62,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:name, :difficulty)
+    params.require(:recipe).permit(:name, :difficulty, :picture)
   end
 
   def add_category(category)

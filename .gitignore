@@ -19,3 +19,6 @@
 TAGS
 gems.tags
 tags
+
+# Ignore pics folder
+public/system/

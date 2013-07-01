@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th Picture
     %th Name
     %th Difficulty
     %th
@@ -10,6 +11,7 @@
 
   - @recipes.each do |recipe|
     %tr
+      %td= image_tag recipe.picture.url(:thumb)
       %td= recipe.name
       %td= recipe.difficulty
       %td= link_to 'Show', recipe

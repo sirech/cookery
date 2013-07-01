@@ -1,4 +1,4 @@
-= form_for @recipe do |f|
+= form_for @recipe, :html => { :multipart => true } do |f|
   - if @recipe.errors.any?
     #error_explanation
       %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
@@ -13,6 +13,8 @@
   = f.select :difficulty, options_for_select(Recipe.difficulty_levels)
 
   = text_field_tag 'category'
+
+  = f.file_field :picture
 
   .actions
     = f.submit 'Save'

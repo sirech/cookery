@@ -18,6 +18,9 @@ gem 'uglifier', '>= 1.3.0'
 # Pagination
 gem 'kaminari'
 
+# Image uploading
+gem 'paperclip', '~> 3.0'
+
 # DB
 
 # Add foreign keys in migrations

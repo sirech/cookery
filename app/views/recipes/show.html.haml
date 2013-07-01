@@ -1,5 +1,7 @@
 %p#notice= notice
 
+= image_tag @recipe.picture.url(:medium)
+
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 \|

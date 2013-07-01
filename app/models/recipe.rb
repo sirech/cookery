@@ -5,6 +5,13 @@ class Recipe < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_one :first_step, class_name: 'Step'
 
+  has_attached_file :picture,
+                    styles: { medium: '300x300>', thumb: '100x100>' },
+                    default_url: '/images/:style/pan.png'
+  validates_attachment_size :picture, less_than: 3.megabytes
+  validates_attachment_content_type :picture,
+                                    content_type: %w(image/jpeg image/png)
+
   # Difficulty
   DIFFICULTY_LEVELS = %w(easy medium difficult).freeze
   validates_inclusion_of :difficulty, in: DIFFICULTY_LEVELS
