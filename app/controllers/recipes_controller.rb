@@ -2,13 +2,11 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   # GET /recipes
-  # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.order(:name).page(params[:page]).per(5)
   end
 
   # GET /recipes/1
-  # GET /recipes/1.json
   def show
   end
 
@@ -22,7 +20,6 @@ class RecipesController < ApplicationController
   end
 
   # POST /recipes
-  # POST /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
     add_category params[:category]
@@ -37,7 +34,6 @@ class RecipesController < ApplicationController
   end
 
   # PATCH/PUT /recipes/1
-  # PATCH/PUT /recipes/1.json
   def update
     add_category params[:category]
 
@@ -51,7 +47,6 @@ class RecipesController < ApplicationController
   end
 
   # DELETE /recipes/1
-  # DELETE /recipes/1.json
   def destroy
     @recipe.destroy
     respond_to do |format|

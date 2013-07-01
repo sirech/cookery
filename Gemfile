@@ -15,6 +15,9 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
+# Pagination
+gem 'kaminari'
+
 # DB
 
 # Add foreign keys in migrations
