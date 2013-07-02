@@ -7,7 +7,8 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :first_step
 
   has_attached_file :picture,
-                    styles: { medium: '300x300>', thumb: '100x100>' },
+                    styles: { medium: '300x300!', thumb: '100x100!' },
+                    convert_options: { thumb: '-quality 75 -strip' },
                     default_url: '/images/:style/pan.png'
   validates_attachment_size :picture, less_than: 3.megabytes
   validates_attachment_content_type :picture,
