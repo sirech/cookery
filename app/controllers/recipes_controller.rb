@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes
   def index
-    @recipes = Recipe.order(:name).page(params[:page]).per(5)
+    @recipes = Recipe.order(:name).page(params[:page])
   end
 
   # GET /recipes/1
