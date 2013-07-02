@@ -23,11 +23,14 @@ class Recipe < ActiveRecord::Base
   end
 
   def steps
+    #TODO: remove
+    return [] unless first_step
+
     first_step.self_and_descendants
   end
 
   def duration
-    steps.map(&:duration).reduce(&:+)
+    steps.map(&:duration).reduce(0, &:+)
   end
 
   def ingredients

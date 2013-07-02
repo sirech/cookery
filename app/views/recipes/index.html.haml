@@ -13,10 +13,15 @@
     - @recipes.each do |recipe|
       %li.span4.box
         = link_to recipe, class: 'thumbnail' do
-          = image_tag recipe.picture.url(:medium)
+          = image_tag recipe.picture.url(:medium), class: 'img-rounded'
           %div.caption
-            %p= recipe.name
-            %p= recipe.difficulty
+            %h3= recipe.name
+            %div.row-fluid
+              %div.span6.text-left= distance_of_time_in_words(recipe.duration)
+              = difficulty_tag recipe.difficulty
+            %div.row-fluid
+              - recipe.categories.each do |category|
+                %span.badge.badge-info= category.name
 
 %br
 
