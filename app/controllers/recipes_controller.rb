@@ -66,7 +66,7 @@ class RecipesController < ApplicationController
   end
 
   def add_category(category)
-    if category
+    if category.present?
       tag = Category.find_by_name(category) || Category.create(name: category)
       @recipe.categories << tag
     end
