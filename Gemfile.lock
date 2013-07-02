@@ -210,6 +210,7 @@ DEPENDENCIES
   kaminari
   paperclip (~> 3.0)
   rails (= 4.0.0)
+  rb-fsevent
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0)
   sdoc

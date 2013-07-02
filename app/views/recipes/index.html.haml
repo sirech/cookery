@@ -4,25 +4,19 @@
       %div.span12
         %h1 Listing recipes
     %div.row
-      %div.span6
+      %div.span12
         = paginate @recipes
-      %div.span6
-        = page_entries_info @recipes
 
 %div.container-fluid
 
   %ul.thumbnails
     - @recipes.each do |recipe|
       %li.span4.box
-        %div.thumbnail
+        = link_to recipe, class: 'thumbnail' do
           = image_tag recipe.picture.url(:medium)
           %div.caption
             %p= recipe.name
             %p= recipe.difficulty
-            %div.row-fluid
-              %div.span4= link_to 'Show', recipe, class: 'btn btn-primary'
-              %div.span4.btn.btn-info= link_to 'Edit', edit_recipe_path(recipe)
-              %div.span4.btn.btn-danger= link_to 'Destroy', recipe, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
