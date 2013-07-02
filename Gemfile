@@ -6,8 +6,11 @@ gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-# Frontend
-gem 'bootstrap-sass'
+### Frontend
+
+# twitter/bootstrap
+gem 'bootstrap-sass', '~> 2.3.2.0'
+
 gem 'haml'
 gem 'haml-rails'
 gem 'jquery-rails'
@@ -21,7 +24,7 @@ gem 'kaminari'
 # Image uploading
 gem 'paperclip', '~> 3.0'
 
-# DB
+### DB
 
 # Add foreign keys in migrations
 gem 'foreigner'

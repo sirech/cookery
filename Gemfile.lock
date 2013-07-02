@@ -194,7 +194,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass
+  bootstrap-sass (~> 2.3.2.0)
   closure_tree
   factory_girl_rails
   foreigner
@@ -210,7 +210,6 @@ DEPENDENCIES
   kaminari
   paperclip (~> 3.0)
   rails (= 4.0.0)
-  rb-fsevent
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0)
   sdoc
