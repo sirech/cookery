@@ -22,3 +22,6 @@ tags
 
 # Ignore pics folder
 public/system/
+
+# Ignore sass cache
+.sass-cache/
