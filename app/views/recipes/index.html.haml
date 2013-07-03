@@ -1,11 +1,11 @@
 %div.well
-  %div.container
-    %div.row
+  %div.container-fluid
+    %div.row-fluid
       %div.span12
-        %h1.text-center Recipes
-    %div.row
-      %div.span12
-        = paginate @recipes
+        %h1 Recipes
+        = link_to new_recipe_path, class: 'btn btn-large btn-success' do
+          %i.icon-plus-sign.icon-white
+          Add Recipe
 
 %ul.thumbnails
   - @recipes.each do |recipe|
@@ -23,4 +23,7 @@
 
 %br
 
-= link_to 'New Recipe', new_recipe_path
+%div.text-center= page_entries_info @recipes
+= paginate @recipes
+
+
