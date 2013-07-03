@@ -40,6 +40,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # Only use the new syntax
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
   # Required by closure_tree to run tests with sqlite
   config.before(:all) do
     ENV['FLOCK_DIR'] = Dir.mktmpdir
