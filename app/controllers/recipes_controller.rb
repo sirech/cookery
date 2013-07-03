@@ -22,7 +22,6 @@ class RecipesController < ApplicationController
   # POST /recipes
   def create
     @recipe = Recipe.new(recipe_params)
-    add_category params[:category]
 
     respond_to do |format|
       if @recipe.save
@@ -35,8 +34,6 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1
   def update
-    add_category params[:category]
-
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
@@ -63,13 +60,6 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:name, :difficulty, :picture, :first_step)
-  end
-
-  def add_category(category)
-    if category.present?
-      tag = Category.find_by_name(category) || Category.create(name: category)
-      @recipe.categories << tag
-    end
   end
 
   def sort_parameters

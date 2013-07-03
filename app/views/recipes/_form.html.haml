@@ -9,6 +9,10 @@
 
   %hr
 
+  = f.association :categories, collection: Category.order(:name).all
+
+  %hr
+
   .controls
     = button_tag type: :submit, class: 'btn btn-success', 'data-loading-text' => 'Saving...' do
       %i.icon-ok.icon-white
