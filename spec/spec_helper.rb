@@ -53,6 +53,17 @@ RSpec.configure do |config|
   config.after(:all) do
     FileUtils.remove_entry_secure ENV['FLOCK_DIR']
   end
+
+  # Clean DB in between runs
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
 
 

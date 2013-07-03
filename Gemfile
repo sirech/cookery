@@ -47,13 +47,14 @@ group :development do
   gem 'guard-ctags-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-fsevent', :require => false
 end
 
 # Testing
 group :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password
