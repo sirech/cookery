@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes
   def index
-    @recipes = Recipe.order(:name).page(params[:page])
+    @recipes = Recipe.order(sort_parameters).page(params[:page])
   end
 
   # GET /recipes/1
@@ -70,5 +70,10 @@ class RecipesController < ApplicationController
       tag = Category.find_by_name(category) || Category.create(name: category)
       @recipe.categories << tag
     end
+  end
+
+  def sort_parameters
+    direction = params[:direction] == 'desc' ? 'desc' : 'asc'
+    "lower(name) #{direction}"
   end
 end
