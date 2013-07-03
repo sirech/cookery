@@ -24,6 +24,9 @@ gem 'kaminari'
 # Image uploading
 gem 'paperclip', '~> 3.0'
 
+# Forms
+gem 'simple_form', '~> 3.0.0.rc'
+
 ### DB
 
 # Add foreign keys in migrations

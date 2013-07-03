@@ -1,37 +1,19 @@
-= form_for @recipe, :html => { :multipart => true } do |f|
-  - if @recipe.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@recipe.errors.count, "error")} prohibited this recipe from being saved:"
-      %ul
-        - @recipe.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for @recipe, html: { multipart: true, class: 'form-horizontal' } do |f|
 
-  = f.label :name
-  = f.text_field :name
-
-  = f.label :difficulty
-  = f.select :difficulty, options_for_select(Recipe.difficulty_levels)
+  = f.input :name
+  = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
 
   %hr
 
-  = f.label :category, 'Add a category'
-  = text_field_tag 'category'
+  = f.input :picture, as: :picture
 
   %hr
 
-  = f.label :picture, 'Choose a picture'
-  = f.file_field :picture
+  .controls
+    = button_tag type: :submit, class: 'btn btn-success', 'data-loading-text' => 'Saving...' do
+      %i.icon-ok.icon-white
+      Save
+    = link_to recipes_path, class: 'btn btn-danger' do
+      %i.icon-remove.icon-white
+      Back
 
-  %hr
-
-  %p Step
-
-  = fields_for :first_step do |step_form|
-    = step_form.label :name
-    = step_form.text_field :name
-
-    = step_form.label :duration
-    = step_form.text_field :duration
-
-  .actions
-    = f.submit 'Save'
