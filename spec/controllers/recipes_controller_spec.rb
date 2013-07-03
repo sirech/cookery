@@ -32,5 +32,10 @@ describe RecipesController do
       post :create, recipe: FactoryGirl.attributes_for(:recipe).tap { |r| r.delete(:first_step) }
       expect(assigns(:recipe).valid?).to be_true
     end
+
+    it 'rejects a recipe without a name' do
+      post :create, recipe: FactoryGirl.attributes_for(:recipe).tap { |r| [:name, :first_step].each { |a| r.delete(a) } }
+      expect(assigns(:recipe).valid?).to be_false
+    end
   end
 end
