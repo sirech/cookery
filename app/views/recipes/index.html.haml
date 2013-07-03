@@ -9,7 +9,7 @@
 
 %ul.thumbnails
   - @recipes.each do |recipe|
-    %li.span3.box
+    %li.span3
       = link_to recipe, class: 'thumbnail' do
         = image_tag recipe.picture.url(:medium), class: 'img-rounded'
         %div.caption
