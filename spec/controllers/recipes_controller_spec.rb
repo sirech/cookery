@@ -3,9 +3,13 @@ require 'spec_helper'
 describe RecipesController do
 
   before(:each) do
-    FactoryGirl.create(:recipe, name: 'paella', difficulty: 'medium')
-    FactoryGirl.create(:recipe, name: 'Lentejas', difficulty: 'easy')
-    FactoryGirl.create(:recipe, name: 'huevo frito', difficulty: 'difficult')
+    [
+      ['paella', 'medium'],
+      ['Lentejas', 'easy'],
+      ['huevo frito', 'difficult']
+    ].each do |name, difficulty|
+      FactoryGirl.create(:recipe, name: name, difficulty: difficulty)
+    end
   end
 
   describe 'index' do
@@ -20,5 +24,13 @@ describe RecipesController do
       expect(assigns(:recipes).map(&:name)).to eq(['paella', 'Lentejas', 'huevo frito'])
     end
 
+  end
+
+  describe 'create' do
+
+    it 'generates a valid recipe' do
+      post :create, recipe: FactoryGirl.attributes_for(:recipe).tap { |r| r.delete(:first_step) }
+      expect(assigns(:recipe).valid?).to be_true
+    end
   end
 end
