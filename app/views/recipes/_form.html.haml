@@ -9,10 +9,10 @@
 
   %hr
 
-  = f.association :categories, collection: Category.order(:name).load
+  = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
 
   .controls
-    = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'string'
+    = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
 
   %hr
 
