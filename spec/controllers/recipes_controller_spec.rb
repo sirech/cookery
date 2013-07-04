@@ -46,6 +46,10 @@ describe RecipesController do
         expect(assigns(:recipe).valid?).to be_true
       end
 
+      it 'creates a new recipe in the db' do
+        expect { post :create, recipe: attributes }.to change { Recipe.count }.by(1)
+      end
+
       %w(name difficulty).each do |required|
         it 'rejects a recipe without a #{required}' do
           post :create, recipe: without(required.to_sym)
