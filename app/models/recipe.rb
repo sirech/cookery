@@ -9,7 +9,7 @@ class Recipe < ActiveRecord::Base
                     styles: { medium: '300x300!', thumb: '100x100!' },
                     convert_options: { thumb: '-quality 75 -strip' },
                     default_url: '/images/:style/pan.png'
-  validates_attachment_size :picture, less_than: 3.megabytes
+  validates_attachment_size :picture, less_than: 2.megabytes
   validates_attachment_content_type :picture,
                                     content_type: %w(image/jpeg image/png)
 

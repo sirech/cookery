@@ -11,9 +11,8 @@
 
   = f.association :categories, collection: Category.order(:name).load
 
-  .controls.input-append
-    = text_field_tag :extra_category, nil, placeholder: 'Add new tag', class: 'string span10'
-    %a.btn ➕
+  .controls
+    = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'string'
 
   %hr
 

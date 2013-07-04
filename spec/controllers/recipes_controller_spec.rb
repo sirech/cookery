@@ -35,7 +35,7 @@ describe RecipesController do
       end
     }
 
-    def without *attrs
+    def without(*attrs)
       attributes.tap { |r| attrs.each { |a| r.delete(a) } }
     end
 
@@ -64,6 +64,18 @@ describe RecipesController do
         expect(assigns(:recipe).categories).not_to be_empty
       end
 
+      [
+        'tag1, tag2, tag3',
+        'tag1 tag2 tag3',
+        'tag1,tag2 tag3',
+        ' tag1  tag2 tag3',
+        'tag1, tag2, tag1, tag3'
+      ].each do |extra_tags|
+        it "adds extra categories in the form \"#{extra_tags}\"" do
+          post :create, recipe: attributes, 'extra-category' => extra_tags
+          expect(assigns(:recipe).categories.map(&:name)).to include(*%w(tag1 tag2 tag3))
+        end
+      end
     end
 
     describe 'update' do

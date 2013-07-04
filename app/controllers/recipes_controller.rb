@@ -59,7 +59,16 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
+    add_extra_categories
     params.require(:recipe).permit(:name, :difficulty, :picture, :category_ids => [])
+  end
+
+  def add_extra_categories
+    if params[:'extra-category']
+      categories = params[:'extra-category'].split(/[ ,]/).map(&:strip).delete_if(&:blank?)
+      categories = categories.map { |c| Category.where(name: c).first_or_create.id }
+      params[:recipe][:category_ids] += categories
+    end
   end
 
   def sort_parameters
