@@ -4,7 +4,6 @@ class Recipe < ActiveRecord::Base
 
   has_and_belongs_to_many :categories
   has_one :first_step, class_name: 'Step'
-  accepts_nested_attributes_for :first_step
 
   has_attached_file :picture,
                     styles: { medium: '300x300!', thumb: '100x100!' },

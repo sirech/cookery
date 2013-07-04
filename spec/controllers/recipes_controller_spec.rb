@@ -26,16 +26,54 @@ describe RecipesController do
 
   end
 
-  describe 'create' do
+  context '<input>' do
 
-    it 'generates a valid recipe' do
-      post :create, recipe: FactoryGirl.attributes_for(:recipe).tap { |r| r.delete(:first_step) }
-      expect(assigns(:recipe).valid?).to be_true
+    let(:attributes) {
+      FactoryGirl.attributes_for(:recipe).tap do |r|
+        r.delete(:first_step)
+        r[:category_ids] = r[:categories].map(&:id)
+      end
+    }
+
+    def without *attrs
+      attributes.tap { |r| attrs.each { |a| r.delete(a) } }
     end
 
-    it 'rejects a recipe without a name' do
-      post :create, recipe: FactoryGirl.attributes_for(:recipe).tap { |r| [:name, :first_step].each { |a| r.delete(a) } }
-      expect(assigns(:recipe).valid?).to be_false
+    describe 'create' do
+
+      it 'generates a valid recipe' do
+        post :create, recipe: attributes
+        expect(assigns(:recipe).valid?).to be_true
+      end
+
+      %w(name difficulty).each do |required|
+        it 'rejects a recipe without a #{required}' do
+          post :create, recipe: without(required.to_sym)
+          expect(assigns(:recipe).valid?).to be_false
+        end
+      end
+
+      it 'adds new categories' do
+        post :create, recipe: attributes
+
+        expect(assigns(:recipe).valid?).to be_true
+        expect(assigns(:recipe).categories).not_to be_empty
+      end
+
+    end
+
+    describe 'update' do
+
+      before(:each) do
+        post :create, recipe: attributes
+        @existing = assigns(:recipe)
+      end
+
+      it 'removes categories' do
+        expect(@existing.categories).not_to be_empty
+        put :update, id: @existing.id, recipe: attributes.tap { |attr| attr[:category_ids] = [] }
+        expect(assigns(:recipe).categories).to be_empty
+      end
     end
   end
 end

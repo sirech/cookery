@@ -1,8 +1,4 @@
 FactoryGirl.define do
-  factory :category do
-    name 'spanish'
-  end
-
   factory :ingredient do
     sequence(:name) { |n| "Ingredient[#{n}]" }
     found_at 'Rewe'
@@ -11,6 +7,10 @@ FactoryGirl.define do
       name 'water'
       found_at 'faucet'
     end
+  end
+
+  factory :category do
+    sequence(:name) { |n| "Category[#{n}]" }
   end
 
   factory :step do
@@ -45,6 +45,8 @@ FactoryGirl.define do
   factory :recipe do
     sequence(:name) { |n| "Ingredient[#{n}]" }
     difficulty 'medium'
+
+    categories { FactoryGirl.create_list(:category, 3) }
 
     first_step { FactoryGirl.create(:step_last) }
 

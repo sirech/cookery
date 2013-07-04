@@ -59,7 +59,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:name, :difficulty, :picture, :first_step)
+    params.require(:recipe).permit(:name, :difficulty, :picture, :category_ids => [])
   end
 
   def sort_parameters

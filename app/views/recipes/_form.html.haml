@@ -9,7 +9,7 @@
 
   %hr
 
-  = f.association :categories, collection: Category.order(:name).all
+  = f.association :categories, collection: Category.order(:name).load
 
   %hr
 
