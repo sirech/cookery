@@ -1,26 +1,33 @@
 = simple_form_for @recipe, html: { multipart: true, class: 'form-horizontal' } do |f|
 
-  = f.input :name
-  = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
+  .control-group
+    .controls
+      = f.input :name
+      = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
 
-  %hr
+  .control-group
+    .controls
+      = f.input :picture, as: :picture
 
-  = f.input :picture, as: :picture
+  .control-group
+    .controls
+      = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
+      = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
 
-  %hr
+  .control-group
+    .controls
+      = link_to '#', class: 'controls btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#add-step' do
+        %i.icon-plus-sign.icon-white
+        Add Step
 
-  = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
+  .control-group
+    .controls
+      = button_tag type: :submit, class: 'controls btn btn-primary', 'data-loading-text' => 'Saving...' do
+        %i.icon-ok.icon-white
+        Save
+      = link_to recipes_path, class: 'btn' do
+        %i.icon-remove
+        Back
 
-  .controls
-    = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
-
-  %hr
-
-  .controls
-    = button_tag type: :submit, class: 'btn btn-success', 'data-loading-text' => 'Saving...' do
-      %i.icon-ok.icon-white
-      Save
-    = link_to recipes_path, class: 'btn btn-danger' do
-      %i.icon-remove.icon-white
-      Back
+  = render 'create_step'
 

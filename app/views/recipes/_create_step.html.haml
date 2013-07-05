@@ -1,0 +1,23 @@
+#add-step.modal.hide.fade{ role: 'dialog', tabindex: '-1', 'aria-labelledby' => 'add-step-label', 'aria-hidden' => 'true'}
+  .modal-header
+    = button_tag '×', type: :button, class: 'close', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'
+    %h3#add-step-label
+      The header
+  .modal-body
+    = simple_form_for @example_step, url: '/' do |f|
+
+      .control-group
+        = f.input :name
+        .input-append
+          = f.input :duration
+          .btn-group
+            = button_tag class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do
+              minutes
+              %span.caret
+            %ul.dropdown-menu
+              %li hours
+
+  .modal-footer
+    = button_tag class: 'btn btn-primary' do
+      %i.icon-ok.icon-white
+      Save
