@@ -4,18 +4,21 @@
     %h3#add-step-label
       The header
   .modal-body
-    = simple_form_for @example_step, url: '/' do |f|
+    = simple_form_for @example_step, url: '/', html: { class: 'form-horizontal'} do |f|
 
       .control-group
         = f.input :name
-        .input-append
-          = f.input :duration
+        = f.input :duration, wrapper: 'append' do
+          = f.input_field :duration, class: 'span4'
           .btn-group
             = button_tag class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do
               minutes
               %span.caret
             %ul.dropdown-menu
-              %li hours
+              %li
+                %a{ href: '#' } hours
+              %li
+                %a{ href: '#' } seconds
 
   .modal-footer
     = button_tag class: 'btn btn-primary' do
