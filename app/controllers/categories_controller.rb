@@ -1,14 +1,10 @@
 class CategoriesController < ApplicationController
+
+  include JsonResponse
+
   def create
     @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.json { render json: @category, status: 'created' }
-      else
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_as_json @category
   end
 
   private
