@@ -20,9 +20,13 @@
         %i.icon-plus-sign.icon-white
         Add Step
 
+  #steps
+    = f.hidden_field :steps
+    .accordion.controls
+
   .control-group
     .controls
-      = button_tag type: :submit, class: 'controls btn btn-primary', 'data-loading-text' => 'Saving...' do
+      = button_tag type: :submit, class: 'controls btn btn-primary' do
         %i.icon-ok.icon-white
         Save
       = link_to recipes_path, class: 'btn' do
@@ -31,3 +35,4 @@
 
 = render 'create_step'
 
+= render 'step_template'

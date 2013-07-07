@@ -4,7 +4,7 @@
     %h3#add-step-label
       The header
   .modal-body
-    = simple_form_for @example_step, url: '/', html: { class: 'form-horizontal'} do |f|
+    = simple_form_for @example_step, remote: true, html: { id: 'add-step-form', class: 'form-horizontal', 'data-type' => 'json'} do |f|
 
       .control-group
         = f.input :name
@@ -21,6 +21,6 @@
                 %a{ href: '#' } seconds
 
   .modal-footer
-    = button_tag class: 'btn btn-primary' do
+    = button_tag id: 'add-step-confirm', class: 'btn btn-primary' do
       %i.icon-ok.icon-white
       Save
