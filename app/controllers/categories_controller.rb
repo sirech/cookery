@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    respond_as_json @category
+    create_as_json @category
   end
 
   private

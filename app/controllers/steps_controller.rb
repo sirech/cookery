@@ -4,7 +4,7 @@ class StepsController < ApplicationController
 
   def create
     @step = Step.new(step_params)
-    respond_as_json @step
+    create_as_json @step
   end
 
   private

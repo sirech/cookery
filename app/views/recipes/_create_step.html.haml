@@ -22,8 +22,8 @@
 
       .control-group.fieldset
         %legend Ingredient Picker
-        = text_field_tag :'ingredients', nil, placeholder: 'Add ingredients here', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add ingredients by writing them here'
-
+        = text_field_tag :'ingredients', nil, placeholder: 'Add ingredients here', class: 'controls string', autocomplete: 'off', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add ingredients by writing them here'
+        #selected-ingredients
 
   .modal-footer
     = button_tag id: 'add-step-confirm', class: 'btn btn-primary' do

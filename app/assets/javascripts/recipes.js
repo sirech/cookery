@@ -35,9 +35,9 @@
 
   var stepUpdater = function(modal, steps_container) {
 
-    field = $(steps_container).find('input');
-    steps = [];
-    ids = [];
+    var field = $(steps_container).find('input');
+    var steps = [];
+    var ids = [];
 
     return {
       observe: function() {
@@ -53,10 +53,41 @@
     };
   };
 
+  var ingredientPicker = function(ingredients_field, selected) {
+
+    var container = $(selected);
+
+    return {
+      observe: function() {
+
+        $.get('/ingredients', null, function(data) {
+          var ingredients = $.map(data, function(ingredient) {
+            return ingredient.name;
+          });
+
+          $(ingredients_field).typeahead({
+            source: ingredients
+          });
+        });
+
+
+        // $(ingredients_field).on('submit', function(data) {
+        //   console.log(data);
+        // });
+      },
+
+      add_ingredient: function(ingredient) {
+        container.append(
+          $("<span>" + ingredient + "</span").addClass('badge badge-info'));
+      }
+    };
+  };
+
   $(function() {
     $('*[rel=tooltip]').tooltip();
 
     stepCreator('#add-step', '#add-step-confirm', '#add-step-form').observe();
     stepUpdater('#add-step', '#steps').observe();
+    ingredientPicker('#ingredients', '#selected-ingredients').observe();
   });
 })();
