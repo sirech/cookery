@@ -89,6 +89,12 @@ describe RecipesController do
           expect(step).not_to be_nil
         end
       end
+
+      it 'does not create any step if the steps parameter is empty' do
+        attributes[:steps] = '[]'
+        post :create, recipe: attributes
+        expect(assigns(:recipe).steps).to be_empty
+      end
     end
 
     describe 'update' do

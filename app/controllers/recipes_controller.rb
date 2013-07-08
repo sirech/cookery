@@ -78,7 +78,7 @@ class RecipesController < ApplicationController
   end
 
   def add_steps
-    if params[:recipe][:steps]
+    if params[:recipe][:steps] && params[:recipe][:steps] != '[]'
       steps = Step.find(params[:recipe][:steps].split(','))
 
       if steps.any?
