@@ -19,3 +19,7 @@ body {
 }
 
 @import "bootstrap-responsive";
+
+.btn {
+  @include border-radius(20px);
+}

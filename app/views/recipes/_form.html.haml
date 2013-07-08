@@ -1,20 +1,24 @@
 = simple_form_for @recipe, html: { multipart: true, class: 'form-horizontal' } do |f|
 
-  .control-group
+  .control-group.fieldset
+    %legend Basic Info
     .controls
       = f.input :name
       = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
 
-  .control-group
+  .control-group.fieldset
+    %legend Picture
     .controls
       = f.input :picture, as: :picture
 
-  .control-group
+  .control-group.fieldset
+    %legend Categories
     .controls
       = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
       = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
 
-  .control-group
+  .control-group.fieldset
+    %legend Steps
     .controls
       = link_to '#', class: 'controls btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#add-step' do
         %i.icon-plus-sign.icon-white
