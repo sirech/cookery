@@ -37,7 +37,7 @@
 
     field = $(steps_container).find('input');
     steps = [];
-    ids = []
+    ids = [];
 
     return {
       observe: function() {
@@ -46,7 +46,7 @@
             steps.push(data);
             $(steps_container).find('.accordion')
               .loadTemplate($('#step-template'), steps);
-            ids.push(data.id)
+            ids.push(data.id);
             field.val(ids);
           });
       }
