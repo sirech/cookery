@@ -23,6 +23,7 @@ class RecipesController < ApplicationController
   # POST /recipes
   def create
     @recipe = Recipe.new(recipe_params)
+    add_steps
 
     respond_to do |format|
       if @recipe.save
@@ -73,6 +74,24 @@ class RecipesController < ApplicationController
       categories = params[:'extra-category'].split(/[ ,]/).map(&:strip).delete_if(&:blank?)
       categories = categories.map { |c| Category.where(name: c).first_or_create.id }
       params[:recipe][:category_ids] += categories
+    end
+  end
+
+  def add_steps
+    if params[:recipe][:steps]
+      steps = Step.find(params[:recipe][:steps].split(','))
+
+      if steps.any?
+        @recipe.first_step = steps.first
+        steps.each_cons(2) do |parent,child|
+          parent.children << child
+        end
+
+        steps.map do |step|
+          step.recipe = @recipe
+          step.save
+        end
+      end
     end
   end
 

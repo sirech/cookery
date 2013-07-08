@@ -43,7 +43,7 @@ FactoryGirl.define do
   end
 
   factory :recipe do
-    sequence(:name) { |n| "Ingredient[#{n}]" }
+    sequence(:name) { |n| "Recipe[#{n}]" }
     difficulty 'medium'
 
     categories { FactoryGirl.create_list(:category, 3) }
@@ -52,6 +52,13 @@ FactoryGirl.define do
 
     factory :recipe_multi_step do
       first_step { FactoryGirl.create(:step_first) }
+    end
+
+    after :build do |r|
+      r.steps.map do |step|
+        step.recipe = r
+        step.save
+      end
     end
   end
 end

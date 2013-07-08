@@ -29,7 +29,8 @@ describe RecipesController do
   context '<input>' do
 
     let(:attributes) {
-      FactoryGirl.attributes_for(:recipe).tap do |r|
+      FactoryGirl.attributes_for(:recipe_multi_step).tap do |r|
+        r[:steps] = r[:first_step].self_and_descendants.map(&:id).join ','
         r.delete(:first_step)
         r[:category_ids] = r[:categories].map(&:id)
       end
@@ -74,6 +75,18 @@ describe RecipesController do
         it "adds extra categories in the form \"#{extra_tags}\"" do
           post :create, recipe: attributes, 'extra-category' => extra_tags
           expect(assigns(:recipe).categories.map(&:name)).to include(*%w(tag1 tag2 tag3))
+        end
+      end
+
+      it 'creates the step hierarchy' do
+        post :create, recipe: attributes
+        expect(assigns(:recipe).steps.map(&:name)).to eq(%w(prepare cook rest))
+      end
+
+      it 'sets the recipe for every step' do
+        post :create, recipe: attributes
+        assigns(:recipe).steps.each do |step|
+          expect(step).not_to be_nil
         end
       end
     end
