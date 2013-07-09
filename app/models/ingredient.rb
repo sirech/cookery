@@ -1,3 +1,3 @@
 class Ingredient < ActiveRecord::Base
-  include Named
+  validates_uniqueness_of :name
 end

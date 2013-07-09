@@ -56,6 +56,29 @@
   var ingredientPicker = function(ingredients_field, selected) {
 
     var container = $(selected);
+    var field = $(ingredients_field);
+    var ingredients = [];
+    var add_ingredient = function(ingredient) {
+      if($.inArray(ingredient, ingredients) != -1) {
+        return;
+      }
+
+      ingredients.push(ingredient);
+      container.find('input').val(ingredients);
+      container.append(
+        $("<span></span")
+          .html(ingredient)
+          .addClass('badge badge-info'));
+    };
+
+    var create_ingredient = function() {
+      var ingredient = field.find('#ingredients').val();
+      $.post('/ingredients', { ingredient: { name: ingredient }})
+        .done(function(data) {
+          add_ingredient(data.name);
+        });
+      field.find('#ingredients').val('');
+    };
 
     return {
       observe: function() {
@@ -65,20 +88,24 @@
             return ingredient.name;
           });
 
-          $(ingredients_field).typeahead({
-            source: ingredients
+          field.find('#ingredients').typeahead({
+            source: ingredients,
+            updater: function(item) {
+              add_ingredient(item);
+              return '';
+            }
           });
         });
 
+        field.find('button').on('click', function() {
+          create_ingredient();
+        });
 
-        // $(ingredients_field).on('submit', function(data) {
-        //   console.log(data);
-        // });
-      },
-
-      add_ingredient: function(ingredient) {
-        container.append(
-          $("<span>" + ingredient + "</span").addClass('badge badge-info'));
+        $(ingredients_field).on('keypress', function(e) {
+          if(e.which == 13) {
+            create_ingredient();
+          }
+        });
       }
     };
   };
@@ -88,6 +115,6 @@
 
     stepCreator('#add-step', '#add-step-confirm', '#add-step-form').observe();
     stepUpdater('#add-step', '#steps').observe();
-    ingredientPicker('#ingredients', '#selected-ingredients').observe();
+    ingredientPicker('#ingredients-group', '#selected-ingredients').observe();
   });
 })();

@@ -5,11 +5,12 @@
       Create a new step
   .modal-body
     = simple_form_for @example_step, remote: true, html: { id: 'add-step-form', class: 'form-horizontal', 'data-type' => 'json'} do |f|
+      = button_tag 'dummy', class: 'hidden', type: :submit
 
       .control-group
         = f.input :name
         = f.input :duration, wrapper: 'append' do
-          = f.input_field :duration, class: 'span4'
+          = f.input_field :duration, class: 'span7'
           .btn-group
             = button_tag class: 'btn dropdown-toggle', 'data-toggle' => 'dropdown' do
               minutes
@@ -22,8 +23,13 @@
 
       .control-group.fieldset
         %legend Ingredient Picker
-        = text_field_tag :'ingredients', nil, placeholder: 'Add ingredients here', class: 'controls string', autocomplete: 'off', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add ingredients by writing them here'
+        #ingredients-group.input-append.controls
+          = text_field_tag :'ingredients', nil, placeholder: 'Add ingredients here', class: 'span11 string', autocomplete: 'off', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-original-title' => 'Add ingredients by writing them here, and wait for the suggestions. If the ingredient does not exist yet, click the plus button'
+          = button_tag class: 'btn', type: :button do
+            %i.icon-plus-sign
+
         #selected-ingredients
+          = f.hidden_field :ingredients
 
   .modal-footer
     = button_tag id: 'add-step-confirm', class: 'btn btn-primary' do
