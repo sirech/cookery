@@ -23,8 +23,12 @@ describe IngredientsController do
     end
 
     it 'creates a new ingredient in the db' do
-        expect { post :create, ingredient: attributes, format: :json }.to change { Ingredient.count }.by(1)
+      expect { post :create, ingredient: attributes, format: :json }.to change { Ingredient.count }.by(1)
     end
 
+    it 'returns a created response code' do
+      post :create, ingredient: attributes, format: :json
+      expect(response.status).to eq(201)
+    end
   end
 end
