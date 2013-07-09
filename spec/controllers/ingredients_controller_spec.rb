@@ -1,6 +1,8 @@
 require 'spec_helper'
+require 'support/create_helper'
 
 describe IngredientsController do
+  include CreateHelper
 
   let(:attributes) { FactoryGirl.attributes_for(:ingredient) }
 
@@ -16,19 +18,6 @@ describe IngredientsController do
   end
 
   describe 'create' do
-
-    it 'generates a valid ingredient' do
-      post :create, ingredient: attributes, format: :json
-        expect(assigns(:ingredient).valid?).to be_true
-    end
-
-    it 'creates a new ingredient in the db' do
-      expect { post :create, ingredient: attributes, format: :json }.to change { Ingredient.count }.by(1)
-    end
-
-    it 'returns a created response code' do
-      post :create, ingredient: attributes, format: :json
-      expect(response.status).to eq(201)
-    end
+    it_behaves_like 'create a new record', Ingredient
   end
 end
