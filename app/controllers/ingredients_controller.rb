@@ -3,7 +3,7 @@ class IngredientsController < ApplicationController
   include JsonResponse
 
   def index
-    @ingredients = Ingredient.order('name').all
+    @ingredients = Ingredient.order('name').load
     respond_to do |format|
       format.json { render json: @ingredients }
     end
