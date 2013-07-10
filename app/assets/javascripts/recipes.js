@@ -45,7 +45,7 @@
           ingredients: function (value, template) {
             list = '';
             $.each(value, function(index, ingredient) {
-              list += $('<span></span>').html(ingredient.name).prop('outerHTML');
+              list += $('<li></li>').html(ingredient.name).prop('outerHTML');
             });
             return list;
           }

@@ -11,7 +11,7 @@ class StepsController < ApplicationController
   private
 
   def step_params
-    params.require(:step).permit(:name, :duration)
+    params.require(:step).permit(:name, :duration, :notes)
   end
 
   def add_ingredients

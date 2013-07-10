@@ -1,12 +1,19 @@
 %script{ id: 'step-template', type: 'text/html'}
   .accordion-group
     .accordion-heading
+      %div.pull-right
+        Duration:
+        %span{ 'data-content' => 'duration' }
       = link_to '#collapseOne', class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '.accordion' do
         %span{ 'data-content' => 'name' }
     #collapseOne.accordion-body.collapse
       .accordion-inner
-        %p
-          Duration:
-          %span{ 'data-content' => 'duration' }
-
-        %p{ 'data-content' => 'ingredients', 'data-format' => 'ingredients' }
+        .row-fluid
+          .span6
+            %h3
+              Ingredients
+            %ul{ 'data-content' => 'ingredients', 'data-format' => 'ingredients' }
+          .span6
+            %h3
+              Notes
+            %p{ 'data-content' => 'notes'}

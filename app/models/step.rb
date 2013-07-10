@@ -9,7 +9,7 @@ class Step < ActiveRecord::Base
 
   def to_json(options = {})
     Jbuilder.encode do |json|
-      json.(self, :id, :name, :duration)
+      json.(self, :id, :name, :duration, :notes)
       json.ingredients self.ingredients do |ingredient|
         json.name ingredient.name
         json.found_at ingredient.found_at if ingredient.found_at
