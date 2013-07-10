@@ -11,8 +11,8 @@
         .modal('hide');
     };
 
-    var error = function(data) {
-      console.log(data);
+    var error = function(status, data) {
+      console.log(status + " " + data);
     };
 
     return {
@@ -23,10 +23,10 @@
 
         $(form)
           .bind('ajax:complete', function(e, xhr) {
-            if(xhr.status == 0) {
+            if(xhr.status <= 300) {
               success(xhr.responseJSON);
             } else {
-              error(xhr.responseJSON);
+              error(xhr.status, xhr.responseJSON);
             }
           });
       }
@@ -41,6 +41,16 @@
 
     return {
       observe: function() {
+        $.addTemplateFormatter({
+          ingredients: function (value, template) {
+            list = '';
+            $.each(value, function(index, ingredient) {
+              list += $('<span></span>').html(ingredient.name).prop('outerHTML');
+            });
+            return list;
+          }
+        });
+
         $(modal)
           .on('step:created', function(e, data) {
             steps.push(data);
