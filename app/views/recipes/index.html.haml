@@ -11,7 +11,7 @@
   - @recipes.each do |recipe|
     %li.span3
       = link_to recipe, class: 'thumbnail' do
-        = image_tag recipe.picture.url(:medium), class: 'img-rounded'
+        = picture_tag recipe
         %div.caption
           %h3= recipe.name
           %div.row-fluid
