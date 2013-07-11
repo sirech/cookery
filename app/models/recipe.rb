@@ -5,13 +5,8 @@ class Recipe < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_one :first_step, class_name: 'Step'
 
-  has_attached_file :picture,
-                    styles: { medium: '300x300!', thumb: '100x100!' },
-                    convert_options: { thumb: '-quality 75 -strip' },
-                    default_url: '/images/:style/pan.png'
-  validates_attachment_size :picture, less_than: 2.megabytes
-  validates_attachment_content_type :picture,
-                                    content_type: %w(image/jpeg image/png)
+  has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures
 
   # Difficulty
   DIFFICULTY_LEVELS = %w(easy medium difficult).freeze
@@ -19,6 +14,14 @@ class Recipe < ActiveRecord::Base
 
   def self.difficulty_levels
     DIFFICULTY_LEVELS
+  end
+
+  def picture
+    if pictures.any?
+      pictures.first
+    else
+      Picture.new
+    end
   end
 
   def steps

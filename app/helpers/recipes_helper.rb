@@ -1,6 +1,6 @@
 module RecipesHelper
   def picture_tag(recipe, size=:medium)
-    image_tag recipe.picture.url(size), class: 'img-rounded'
+    image_tag recipe.picture.photo.url(size), class: 'img-rounded'
   end
 
   def difficulty_tag(difficulty)

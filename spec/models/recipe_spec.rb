@@ -9,6 +9,19 @@ describe Recipe do
                   first_step: FactoryGirl.build(:step_first)
   end
 
+  describe '#picture' do
+
+    it 'should return the first picture of the list' do
+      r = FactoryGirl.create(:recipe_with_pictures)
+      expect(r.picture.photo.url).not_to be_nil
+    end
+
+    it 'should return a default if there are no pictures' do
+      expect(recipe.picture.photo.url).to match(/pan/)
+    end
+
+  end
+
   describe '#difficulty' do
     it 'should only accept valid difficulty levels' do
       recipe.difficulty = 'insane'

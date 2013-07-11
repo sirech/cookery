@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130710170422) do
+ActiveRecord::Schema.define(version: 20130711192701) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -37,15 +37,22 @@ ActiveRecord::Schema.define(version: 20130710170422) do
     t.integer "ingredient_id"
   end
 
+  create_table "pictures", force: true do |t|
+    t.string   "caption"
+    t.integer  "recipe_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "recipes", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
     t.string   "difficulty"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
   end
 
   create_table "step_hierarchies", id: false, force: true do |t|
