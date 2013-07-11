@@ -7,16 +7,16 @@
     .span8
       %h1= @recipe.name
       .row-fluid
-        .span6
-          %h5= distance_of_time_in_words(@recipe.duration)
-        .span6
-          %h2= difficulty_tag(@recipe.difficulty)
-
-      .row-fluid
         - if @recipe.categories.any?
           %h4 Categories
           - @recipe.categories.each do |category|
             %span.badge.badge-info= category.name
+
+      .row-fluid
+        .span6
+          %h5= distance_of_time_in_words(@recipe.duration)
+        .span6
+          %h2= difficulty_tag(@recipe.difficulty)
 
   .row-fluid.boxed
     - @recipe.steps.each do |step|
