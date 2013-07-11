@@ -33,9 +33,6 @@ FactoryGirl.define do
 
       ingredients { FactoryGirl.create_list(:ingredient, 5) }
 
-      after :build do |step|
-        step.children << FactoryGirl.build(:step_last)
-      end
     end
 
     factory :step_first do
@@ -44,9 +41,6 @@ FactoryGirl.define do
 
       ingredients { [FactoryGirl.create(:ingredient_water)] }
 
-      after :build do |step|
-        step.children << FactoryGirl.build(:step_cook)
-      end
     end
   end
 
@@ -56,10 +50,10 @@ FactoryGirl.define do
 
     categories { FactoryGirl.create_list(:category, 3) }
 
-    first_step { FactoryGirl.create(:step_last) }
+    steps { [FactoryGirl.create(:step_last)] }
 
     factory :recipe_multi_step do
-      first_step { FactoryGirl.create(:step_first) }
+      steps { [:step_first, :step_cook, :step_last].map { |s| FactoryGirl.create(s) }}
     end
 
     # Warning: VERY slow

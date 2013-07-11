@@ -32,8 +32,8 @@ gem 'simple_form', '~> 3.0.0.rc'
 # Add foreign keys in migrations
 gem 'foreigner'
 
-# Add tree hierarchy to a model
-gem 'closure_tree'
+# Add ordered lists
+gem 'acts_as_list'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

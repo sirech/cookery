@@ -30,8 +30,7 @@ describe RecipesController do
 
     let(:attributes) {
       FactoryGirl.attributes_for(:recipe_multi_step).tap do |r|
-        r[:steps] = r[:first_step].self_and_descendants.map(&:id).join ','
-        r.delete(:first_step)
+        r[:steps] = r[:steps].map(&:id).join ','
         r[:category_ids] = r[:categories].map(&:id)
       end
     }

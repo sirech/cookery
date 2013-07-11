@@ -3,10 +3,11 @@ class Recipe < ActiveRecord::Base
   include IsNamed
 
   has_and_belongs_to_many :categories
-  has_one :first_step, class_name: 'Step'
 
   has_many :pictures, dependent: :destroy
   accepts_nested_attributes_for :pictures
+
+  has_many :steps, -> { order('position') }
 
   # Difficulty
   DIFFICULTY_LEVELS = %w(easy medium difficult).freeze
@@ -22,13 +23,6 @@ class Recipe < ActiveRecord::Base
     else
       Picture.new
     end
-  end
-
-  def steps
-    #TODO: remove
-    return [] unless first_step
-
-    first_step.self_and_descendants
   end
 
   def duration

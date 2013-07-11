@@ -82,10 +82,7 @@ class RecipesController < ApplicationController
       steps = Step.find(params[:recipe][:steps].split(','))
 
       if steps.any?
-        @recipe.first_step = steps.first
-        steps.each_cons(2) do |parent,child|
-          parent.children << child
-        end
+        @recipe.steps = steps
 
         steps.map do |step|
           step.recipe = @recipe

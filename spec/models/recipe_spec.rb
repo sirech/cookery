@@ -6,7 +6,7 @@ describe Recipe do
     Recipe.create name: 'Lasagna',
                   difficulty: 'medium',
                   categories: [FactoryGirl.build(:category)],
-                  first_step: FactoryGirl.build(:step_first)
+                  steps: [:step_first, :step_cook, :step_last].map { |s| FactoryGirl.create(s) }
   end
 
   describe '#picture' do
@@ -30,8 +30,14 @@ describe Recipe do
   end
 
   describe '#steps' do
-    it 'should return the steps in the recipe taking into account their hierarchy' do
+    it 'should return the steps in the recipe taking into account their order' do
       expect(recipe.steps.map(&:name)).to eq(%w(prepare cook rest))
+    end
+
+    it 'should be possible to change the order' do
+      recipe.steps.first.move_to_bottom
+      recipe.reload
+      expect(recipe.steps.map(&:name)).to eq(%w(cook rest prepare))
     end
   end
 
