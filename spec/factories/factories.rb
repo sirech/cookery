@@ -2,11 +2,13 @@ FactoryGirl.define do
   factory :ingredient do
     sequence(:name) { |n| "Ingredient[#{n}]" }
     found_at 'Rewe'
+  end
 
-    factory :ingredient_water do
-      name 'water'
-      found_at 'faucet'
-    end
+  factory :quantity do |q|
+    unit 'pinch'
+    amount 1
+
+    q.association :ingredient
   end
 
   factory :category do
@@ -27,21 +29,18 @@ FactoryGirl.define do
       duration 5.minutes
     end
 
-    factory :step_cook do
+    factory :step_cook do |s|
       name 'cook'
       duration 15.minutes
 
-      ingredients { FactoryGirl.create_list(:ingredient, 5) }
-
+      s.quantities { |q| [q.association(:quantity)] }
     end
 
     factory :step_first do
       name 'prepare'
       duration 10.minutes
-
-      ingredients { [FactoryGirl.create(:ingredient_water)] }
-
     end
+
   end
 
   factory :recipe do
