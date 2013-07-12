@@ -14,4 +14,12 @@ module RecipesHelper
         class: "pull-right label label-#{to_label[difficulty]}"),
       class: 'span6')
   end
+
+  def amount_tag(amount, unit)
+    unit = unit.pluralize if amount > 1
+    content_tag(:span,
+      "#{amount} #{unit}",
+      class: 'amount'
+    )
+  end
 end

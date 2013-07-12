@@ -18,24 +18,29 @@
         .span6
           %h2= difficulty_tag(@recipe.difficulty)
 
-  .row-fluid.boxed
-    - @recipe.steps.each do |step|
-      .row-fluid.boxed
-        .row-fluid
-          %h3= step.name
+  .row-fluid.boxed.accordion
+    - @recipe.steps.each_with_index do |step,index|
+      .row-fluid.boxed.accordion-group
+        .accordion-heading
+          = link_to "#", class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-target' => "#collapse#{index}" do
+            %h3= step.name
           .pull-right= distance_of_time_in_words(step.duration)
 
-        .row-fluid
-          .span6
-            - if step.ingredients.any?
-              %h4 Ingredients
-              %ul
-                - step.ingredients.each do |ingredient|
-                  %li= ingredient.name
-          .span6
-            - if step.notes.present?
-              %h4 Notes
-              %p= step.notes
+        .collapse.in{ id: "collapse#{index}" }
+          .accordion-inner
+            .span6
+              - if step.quantities.any?
+                %h4 Ingredients
+                %ul.ingredients
+                  - step.quantities.each do |quantity|
+                    %li.ingredient
+                      %span= quantity.ingredient.name
+                      - if quantity.unit.present?
+                        = amount_tag(quantity.amount, quantity.unit)
+            .span6
+              - if step.notes.present?
+                %h4 Notes
+                %p= step.notes
 
 
 = link_to 'Edit', edit_recipe_path(@recipe)
