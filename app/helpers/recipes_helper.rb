@@ -22,4 +22,12 @@ module RecipesHelper
       class: 'amount'
     )
   end
+
+  def duration_tag(duration, options = {})
+    options = { class: '' }.merge(options)
+    content_tag(:div, class: "duration boxed #{options[:class]}") do
+      content_tag(:span, distance_of_time_in_words(duration)) +
+      content_tag(:i, '', class: 'icon-time')
+    end
+  end
 end

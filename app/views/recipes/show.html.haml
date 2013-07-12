@@ -1,7 +1,7 @@
 .container-fluid
   %p#notice= notice
 
-  .row-fluid.boxed
+  .row-fluid.boxed.shadow
     .span4
       = picture_tag @recipe
     .span8
@@ -14,17 +14,17 @@
 
       .row-fluid
         .span6
-          %h5= distance_of_time_in_words(@recipe.duration)
+          = duration_tag(@recipe.duration)
         .span6
           %h2= difficulty_tag(@recipe.difficulty)
 
-  .row-fluid.boxed.accordion
+  .boxed.shadow.accordion.steps-container
     - @recipe.steps.each_with_index do |step,index|
-      .row-fluid.boxed.accordion-group
+      .row-fluid.boxed.shadow.accordion-group.step
         .accordion-heading
+          = duration_tag(step.duration, class: 'pull-right')
           = link_to "#", class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-target' => "#collapse#{index}" do
             %h3= step.name
-          .pull-right= distance_of_time_in_words(step.duration)
 
         .collapse.in{ id: "collapse#{index}" }
           .accordion-inner

@@ -1,4 +1,4 @@
-// FORM
+// Index
 
 @mixin left-break
   margin-left: 0px
@@ -24,33 +24,24 @@ ul.thumbnails
     &.span1:nth-child(12n + 13)
       @include left-break
 
-.modal-body
-  overflow: visible
-
-.typeahead
-  z-index: 1051
-
-#steps
-  .accordion
-    .accordion-heading
-      div
-        margin: 6px
-
-#selected-ingredients
-  margin: 10px 75px 10px 180px
-
-  .badge
-    margin-right: 5px
-
 // SHOW
 @import 'bootstrap'
 
+.shadow
+  @include box-shadow(inset 0 0 2px $grayDark)
+
 .boxed
   @include box-sizing(border-box)
-  border: 2px solid $grayLighter
+  border: 2px solid $grayLight
   @include border-radius(15px)
   padding: 15px
   margin-bottom: 15px
+
+.steps-container
+  background: $grayLighter
+
+  .step
+    background: $white
 
 .ingredients
   .ingredient
@@ -59,3 +50,9 @@ ul.thumbnails
     .amount
       font-style: italic
       float: right
+
+.duration
+  background: $grayLighter
+  max-width: 150px
+  i
+    margin-left: 2px
