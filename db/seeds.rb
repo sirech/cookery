@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 if Rails.env.development?
 
@@ -29,6 +22,8 @@ if Rails.env.development?
                 difficulty: 'medium',
 
                 categories: categories('español', 'arroz'),
+
+                pictures: (['pan.png'] * 3).map { |n| Picture.create(caption: 'pic', photo: Rails.root.join('spec', 'fixtures', n).open) },
 
                 steps: [
     Step.create(name: 'dorar', duration: 10.minutes,
