@@ -9,6 +9,11 @@ FactoryGirl.define do
     amount 1
 
     q.association :ingredient
+
+    factory :quantity_tablespoon do
+      unit 'tablespoon'
+      amount 2
+    end
   end
 
   factory :category do
@@ -29,16 +34,18 @@ FactoryGirl.define do
       duration 5.minutes
     end
 
-    factory :step_cook do |s|
+    factory :step_cook do
       name 'cook'
       duration 15.minutes
 
-      s.quantities { |q| [q.association(:quantity)] }
+      quantities { FactoryGirl.create_list(:quantity, 3) }
     end
 
     factory :step_first do
       name 'prepare'
       duration 10.minutes
+
+      quantities { FactoryGirl.create_list(:quantity_tablespoon, 3) }
     end
 
   end

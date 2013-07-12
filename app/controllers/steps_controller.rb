@@ -15,9 +15,13 @@ class StepsController < ApplicationController
   end
 
   def add_ingredients
-    if params[:step][:ingredients] && params[:step][:ingredients] != '[]'
-      ingredients = Ingredient.where(name: params[:step][:ingredients].split(','))
-      @step.ingredients = ingredients if ingredients.any?
+    if params[:step][:quantities]
+      @step.quantities = params[:step][:quantities].map do |quantity|
+        ingredient = Ingredient.where(name: quantity[:ingredient]).first
+        return nil unless ingredient
+
+        Quantity.create(step: @step, ingredient: ingredient, unit: quantity[:unit], amount: quantity[:amount])
+      end.compact
     end
   end
 end
