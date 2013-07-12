@@ -13,10 +13,15 @@ module RecipesHelper
       'medium' => 'warning',
       'difficult' => 'important'
     }
-    content_tag(:div,
-      content_tag(:span, difficulty,
-        class: "pull-right label label-#{to_label[difficulty]}"),
-      class: 'span6')
+    to_icon = {
+      'easy' => 'icon-thumbs-up',
+      'medium' => '',
+      'difficult' => 'icon-thumbs-down'
+    }
+    content_tag(:div, class: 'span6') do
+      content_tag(:span, difficulty, class: "pull-right label label-#{to_label[difficulty]}") +
+      content_tag(:i, '', class: to_icon[difficulty])
+    end
   end
 
   def amount_tag(amount, unit)
