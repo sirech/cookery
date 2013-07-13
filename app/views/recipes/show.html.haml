@@ -1,6 +1,4 @@
 .container-fluid
-  %p#notice= notice
-
   .row-fluid.boxed.shadow.presentation
     .span4
       - if @recipe.pictures.length > 1
@@ -26,24 +24,25 @@
         = main_picture_tag @recipe
 
     .span8
-      %h1= @recipe.name
+      .row-fluid
+        .span8
+          %h1= @recipe.name
+        .span4
+          = duration_tag(@recipe.duration)
       .row-fluid
         - if @recipe.categories.any?
           %h4 Categories
           - @recipe.categories.each do |category|
             %span.badge.badge-info= category.name
-
       .row-fluid
-        .span6
-          = duration_tag(@recipe.duration)
-        .span6
-          %h2= difficulty_tag(@recipe.difficulty)
+        %h4 Difficulty
+        = difficulty_tag(@recipe.difficulty)
 
   .boxed.shadow.accordion.steps-container
     - @recipe.steps.each_with_index do |step,index|
       .row-fluid.boxed.shadow.accordion-group.step
         .accordion-heading
-          = duration_tag(step.duration, class: 'pull-right')
+          = duration_tag(step.duration)
           = link_to "#", class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-target' => "#collapse#{index}" do
             %h3= step.name
 

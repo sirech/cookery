@@ -7,19 +7,21 @@ module RecipesHelper
     image_tag picture.photo.url(size)
   end
 
-  def difficulty_tag(difficulty)
+  def difficulty_tag(difficulty, options = {})
+    options = { class: '' }.merge(options)
     to_label = {
       'easy' => 'success',
       'medium' => 'warning',
       'difficult' => 'important'
     }
     to_icon = {
-      'easy' => 'icon-thumbs-up',
+      'easy' => 'icon-white icon-thumbs-up',
       'medium' => '',
-      'difficult' => 'icon-thumbs-down'
+      'difficult' => 'icon-white icon-thumbs-down'
     }
-    content_tag(:div, class: 'span4') do
-      content_tag(:span, difficulty, class: "pull-right label label-#{to_label[difficulty]}") +
+
+    content_tag(:span, class: "difficulty label label-#{to_label[difficulty]} #{options[:class]}") do
+      content_tag(:span, difficulty) +
       content_tag(:i, '', class: to_icon[difficulty])
     end
   end
@@ -34,7 +36,7 @@ module RecipesHelper
 
   def duration_tag(duration, options = {})
     options = { class: '' }.merge(options)
-    content_tag(:div, class: "duration boxed #{options[:class]}") do
+    content_tag(:div, class: "duration small-boxed pull-right #{options[:class]}") do
       content_tag(:span, distance_of_time_in_words(duration)) +
       content_tag(:i, '', class: 'icon-time')
     end

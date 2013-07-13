@@ -15,8 +15,10 @@
         %div.caption
           %h3= recipe.name
           %div.row-fluid
-            = duration_tag(recipe.duration, class: 'text-left span8')
-            = difficulty_tag recipe.difficulty
+            .span4
+              = difficulty_tag recipe.difficulty
+            .span8
+              = duration_tag(recipe.duration, class: 'small-duration')
           %div.row-fluid
             - recipe.categories.each do |category|
               %span.badge.badge-info= category.name

@@ -10,7 +10,7 @@ if Rails.env.development?
     Category.where(name: categories)
   end
 
-  %w(aceite ajo sal pimienta agua soja jengibre chili cebolla pimiento zanahoria patata pollo costilla carne salmón avecrem tomate harina azúcar alcachofa arroz guisante).each do |ingredient|
+  %w(aceite ajo sal pimienta agua soja jengibre chili cebolla pimiento zanahoria patata pollo costilla carne salmón avecrem tomate harina azúcar alcachofa arroz guisante chorizo pimentón).each do |ingredient|
     Ingredient.create name: ingredient
   end
 
@@ -47,6 +47,7 @@ if Rails.env.development?
     Step.create(name: 'arroz', duration: 25.minutes,
       notes: "Antes de poner el arroz se sofríe con ajo, después se echa el tomate. El doble de agua que de arroz más un poco\nAl principio el fuego fuerte, a los 5 minutos se baja. Cuando apenas queda agua se cubre la sartén",
       quantities: [
+        Quantity.create(unit: 'teaspoon', amount: 1, ingredient: i('aceite')),
         Quantity.create(unit: 'piece', amount: 2, ingredient: i('ajo')),
         Quantity.create(unit: 'cup', amount: 2, ingredient: i('arroz')),
         Quantity.create(unit: 'cup', amount: 5, ingredient: i('agua')),
@@ -57,6 +58,28 @@ if Rails.env.development?
         Quantity.create(unit: 'piece', amount: 2, ingredient: i('costilla')),
       ]
     )
+  ]
+
+  Recipe.create name: 'patatas a la riojana',
+                difficulty: 'easy',
+
+                categories: categories('español'),
+
+                steps: [
+    Step.create(name: 'cocer', duration: 25.minutes,
+      notes: 'Antes de poner el agua se sofríe todo con un poco de aceite en la cazuela',
+      quantities: [
+        Quantity.create(unit: 'tablespoon', amount: 1, ingredient: i('aceite')),
+        Quantity.create(unit: 'piece', amount: 1, ingredient: i('ajo')),
+        Quantity.create(unit: 'piece', amount: 1, ingredient: i('cebolla')),
+        Quantity.create(unit: 'pinch', amount: 1, ingredient: i('sal')),
+        Quantity.create(unit: 'ml', amount: 1000, ingredient: i('agua')),
+        Quantity.create(unit: 'piece', amount: 1, ingredient: i('chorizo')),
+        Quantity.create(unit: 'piece', amount: 1, ingredient: i('pimiento')),
+        Quantity.create(unit: 'piece', amount: 6, ingredient: i('patata')),
+      ]
+    )
+
   ]
 
 end
