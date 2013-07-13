@@ -32,11 +32,13 @@
     = f.simple_fields_for :steps do |step|
       = render 'step_fields', f: step
 
-  .control-group
-    .controls
-      = button_tag type: :submit, class: 'controls btn btn-primary' do
-        %i.icon-ok.icon-white
-        Save
-      = link_to recipes_path, class: 'btn' do
-        %i.icon-remove
-        Back
+  .boxed.shadow
+    .row-fluid
+      .span5
+      .span7
+        = button_tag type: :submit, class: 'controls btn btn-primary' do
+          %i.icon-ok.icon-white
+          Save
+        = link_to recipes_path, class: 'btn' do
+          %i.icon-remove
+          Back
