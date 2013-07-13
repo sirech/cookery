@@ -2,8 +2,14 @@
   = link_to_remove_association f, class: 'pull-right' do
     %i.icon-remove
 
-  %h3= f.input :name
-  = f.input :duration
+  .row-fluid
+    .span6
+      %h3= f.input :name
+    .span6
+      = f.input :duration, wrapper: 'append' do
+        = f.input_field :duration, class: 'span9'
+        %span.add-on minutes
+
   .row-fluid
     .span6
       %h4 Ingredients
