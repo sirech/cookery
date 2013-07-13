@@ -26,6 +26,7 @@ gem 'paperclip', '~> 3.0'
 
 # Forms
 gem 'simple_form', '~> 3.0.0.rc'
+gem 'cocoon', '~> 1.2.0'
 
 ### DB
 

@@ -8,7 +8,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :pictures
 
   has_many :steps, -> { order('position') }
-  accepts_nested_attributes_for :steps
+  accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
 
   serialize :videos, Array
   validate :video_is_url

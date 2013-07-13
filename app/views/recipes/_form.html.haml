@@ -20,16 +20,17 @@
       // TODO: fix this
       //= f.input :picture, as: :picture
 
-  .control-group.fieldset
-    %legend Steps
-    .controls
-      = link_to '#', class: 'controls btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#add-step' do
-        %i.icon-plus-sign.icon-white
-        Add Step
+  .boxed.shadow.steps-container
+    %h2 Steps
 
-  #steps
-    = f.hidden_field :steps
-    .accordion.controls
+    = link_to_add_association f, :steps, class: 'btn btn-success', 'data-association-insertion-node' => '.steps-container', 'data-association-insertion-method' => 'append' do
+      %i.icon-plus-sign.icon-white
+      Add Step
+
+    %hr
+
+    = f.simple_fields_for :steps do |step|
+      = render 'step_fields', f: step
 
   .control-group
     .controls
@@ -39,35 +40,3 @@
       = link_to recipes_path, class: 'btn' do
         %i.icon-remove
         Back
-
-
-  .boxed.shadow.accordion.steps-container
-    %h2 Steps
-    %hr
-
-    - @recipe.steps.each_with_index do |step,index|
-      .row-fluid.boxed.shadow.accordion-group.step
-        .accordion-heading
-          = duration_tag(step.duration || 0)
-          = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do
-            %h3= step.name
-
-        .collapse.accordion-body.in{ id: "collapse#{index}" }
-          .accordion-inner
-            .span6
-              - if step.quantities.any?
-                %h4 Ingredients
-                %ul.ingredients
-                  - step.quantities.each do |quantity|
-                    %li.ingredient
-                      %span= quantity.ingredient.name
-                      - if quantity.unit.present?
-                        = amount_tag(quantity.amount, quantity.unit)
-            .span6
-              - if step.notes.present?
-                %h4 Notes
-                = simple_format(step.notes)
-
-= render 'create_step'
-
-= render 'step_template'

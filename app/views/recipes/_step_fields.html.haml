@@ -1,0 +1,12 @@
+.nested-fields.row-fluid.boxed.shadow.step
+  = link_to_remove_association f, class: 'pull-right' do
+    %i.icon-remove
+
+  %h3= f.input :name
+  = f.input :duration
+  .row-fluid
+    .span6
+      %h4 Ingredients
+
+    .span6
+      = f.input :notes, input_html: { rows: 5 }
