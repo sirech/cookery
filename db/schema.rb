@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20130713111159) do
 
   create_table "quantities", force: true do |t|
     t.string   "unit"
-    t.integer  "amount"
+    t.integer  "amount",        default: 0
     t.integer  "step_id"
     t.integer  "ingredient_id"
     t.datetime "created_at"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20130713111159) do
   create_table "steps", force: true do |t|
     t.string   "name"
     t.integer  "recipe_id"
-    t.integer  "duration"
+    t.integer  "duration",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes"

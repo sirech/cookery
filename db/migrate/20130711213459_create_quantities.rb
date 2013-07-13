@@ -4,7 +4,7 @@ class CreateQuantities < ActiveRecord::Migration
 
     create_table :quantities do |t|
       t.string :unit
-      t.integer :amount
+      t.integer :amount, default: 0
       t.references :step, index: true
       t.references :ingredient, index: true
 

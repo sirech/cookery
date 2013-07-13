@@ -4,7 +4,7 @@ class CreateSteps < ActiveRecord::Migration
     create_table :steps do |t|
       t.string :name
       t.references :recipe, index: true
-      t.integer :duration
+      t.integer :duration, default: 0
       t.integer :parent_id
 
       t.timestamps

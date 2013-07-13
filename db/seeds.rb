@@ -10,11 +10,15 @@ if Rails.env.development?
     Category.where(name: categories)
   end
 
-  %w(aceite ajo sal pimienta agua soja jengibre chili cebolla pimiento zanahoria patata pollo costilla carne salmón avecrem tomate harina azúcar alcachofa arroz guisante chorizo pimentón).each do |ingredient|
+  %w(aceite ajo sal pimienta agua soja jengibre chili cebolla pimiento zanahoria patata pollo costilla carne salmón avecrem tomate harina azúcar alcachofa arroz guisante chorizo pimentón salmón).each do |ingredient|
     Ingredient.create name: ingredient
   end
 
-  %w(horno wok español pasta arroz dip).each do |category|
+  ['vinagre de arroz'].each do |ingredient|
+    Ingredient.create name: ingredient
+  end
+
+  %w(horno wok español pasta arroz dip asia).each do |category|
     Category.create name: category
   end
 
@@ -83,7 +87,38 @@ if Rails.env.development?
         Quantity.create(unit: 'piece', amount: 6, ingredient: i('patata')),
       ]
     )
+  ]
 
+  Recipe.create name: 'sushi',
+                difficulty: 'medium',
+                categories: categories('asia', 'arroz'),
+
+                videos: ['https://www.youtube.com/watch?v=I4vMelOsHfg', 'https://www.youtube.com/watch?v=aH2TPCuSH5s', 'https://www.youtube.com/watch?v=K729GqTf2pk'],
+
+                steps: [
+
+    Step.create(name: 'lavar arroz', duration: 30.minutes,
+      notes: 'Lavar el arroz con agua hasta que el agua sea transparente. Dejar reposar media hora',
+      quantities: [
+        Quantity.create(unit: 'cup', amount: 2, ingredient: i('arroz'))
+      ]),
+
+    Step.create(name: 'arroz', duration: 15.minutes,
+      notes: 'En cuanto el agua hierva, poner el fuego al mínimo, tapar la cazuela. Un poco más de agua que de arroz.\nAl final, dejar reposar y echar el vinagre, que debe estar caliente',
+      quantities: [
+        Quantity.create(unit: 'cup', amount: 2, ingredient: i('agua')),
+        Quantity.create(unit: 'cup', amount: 2, ingredient: i('arroz')),
+        Quantity.create(unit: 'pinch', amount: 1, ingredient: i('sal')),
+        Quantity.create(unit: 'tablespoon', amount: 1, ingredient: i('azúcar')),
+        Quantity.create(unit: 'tablespoon', amount: 4, ingredient: i('vinagre de arroz')),
+      ]),
+
+    Step.create(name: 'enrollar', duration: 5.minutes,
+      notes: 'Poner el alga por el lado plano de la esterilla, cortada por la mitad. Poner arroz en el alga, con las manos mojadas, dejando 1 centímetro de margen. Poner el salmón cortado en el centro, con un poco de wasabi. Enrollar con la esterilla haciendo fuerza, hasta cerrar el rollo. Cortar con un cuchillo mojado en agua.',
+      quantities: [
+        Quantity.create(unit: 'cup', amount: 2, ingredient: i('arroz')),
+        Quantity.create(unit: 'piece', amount: 1, ingredient: i('salmón'))
+      ])
   ]
 
 end
