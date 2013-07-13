@@ -43,10 +43,10 @@
       .row-fluid.boxed.shadow.accordion-group.step
         .accordion-heading
           = duration_tag(step.duration)
-          = link_to "#", class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-target' => "#collapse#{index}" do
+          = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do
             %h3= step.name
 
-        .collapse.in{ id: "collapse#{index}" }
+        .collapse.accordion-body.in{ id: "collapse#{index}" }
           .accordion-inner
             .span6
               - if step.quantities.any?
