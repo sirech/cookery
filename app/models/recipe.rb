@@ -9,6 +9,19 @@ class Recipe < ActiveRecord::Base
 
   has_many :steps, -> { order('position') }
 
+  serialize :videos, Array
+  validate :video_is_url
+
+  before_save do |recipe|
+    recipe.videos.map! do |video|
+      if video =~ /\/watch\?v=/
+        video.sub('watch?v=', 'embed/')
+      else
+        video
+      end
+    end
+  end
+
   # Difficulty
   DIFFICULTY_LEVELS = %w(easy medium difficult).freeze
   validates_inclusion_of :difficulty, in: DIFFICULTY_LEVELS
@@ -31,5 +44,22 @@ class Recipe < ActiveRecord::Base
 
   def ingredients
     steps.map(&:ingredients).flatten.uniq
+  end
+
+  protected
+
+  def video_is_url
+    videos.each do |video|
+      errors.add(:videos, "#{video} is not a valid url for a video") unless uri?(video)
+    end
+  end
+
+  def uri?(url)
+    uri = URI.parse(url)
+    %w( http https ).include?(uri.scheme) && uri.host.include?('youtube')
+  rescue URI::BadURIError
+    false
+  rescue URI::InvalidURIError
+    false
   end
 end

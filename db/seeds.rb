@@ -25,6 +25,8 @@ if Rails.env.development?
 
                 pictures: (['pan.png'] * 3).map { |n| Picture.create(caption: 'pic', photo: Rails.root.join('spec', 'fixtures', n).open) },
 
+                videos: ['https://www.youtube.com/embed/T-eDbjeTA3E'],
+
                 steps: [
     Step.create(name: 'dorar', duration: 10.minutes,
       notes: 'No tiene que hacerse, solo coger color',
@@ -64,6 +66,8 @@ if Rails.env.development?
                 difficulty: 'easy',
 
                 categories: categories('español'),
+
+                videos: ['https://www.youtube.com/embed/pXXMaVzINt4'],
 
                 steps: [
     Step.create(name: 'cocer', duration: 25.minutes,

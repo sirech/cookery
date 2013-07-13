@@ -58,6 +58,8 @@ FactoryGirl.define do
 
     steps { [FactoryGirl.create(:step_last)] }
 
+    videos { ['http://youtube.com'] * 3 }
+
     factory :recipe_multi_step do
       steps { [:step_first, :step_cook, :step_last].map { |s| FactoryGirl.create(s) }}
     end

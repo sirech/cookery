@@ -39,6 +39,8 @@
         = difficulty_tag(@recipe.difficulty)
 
   .boxed.shadow.accordion.steps-container
+    %h3 Steps
+
     - @recipe.steps.each_with_index do |step,index|
       .row-fluid.boxed.shadow.accordion-group.step
         .accordion-heading
@@ -62,6 +64,14 @@
                 %h4 Notes
                 = simple_format(step.notes)
 
+  - if @recipe.videos.any?
+    .boxed.shadow.videos-container
+      %h3 Videos
+
+      %ul.thumbnails
+        - @recipe.videos.each do |video|
+          %li.boxed.video
+            = youtube_video video
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 \|
