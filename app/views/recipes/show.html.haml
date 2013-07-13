@@ -39,7 +39,8 @@
         = difficulty_tag(@recipe.difficulty)
 
   .boxed.shadow.accordion.steps-container
-    %h3 Steps
+    %h2 Steps
+    %hr
 
     - @recipe.steps.each_with_index do |step,index|
       .row-fluid.boxed.shadow.accordion-group.step
@@ -66,7 +67,8 @@
 
   - if @recipe.videos.any?
     .boxed.shadow.videos-container
-      %h3 Videos
+      %h2 Videos
+      %hr
 
       %ul.thumbnails
         - @recipe.videos.each do |video|
