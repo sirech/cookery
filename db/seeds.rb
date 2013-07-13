@@ -45,7 +45,7 @@ if Rails.env.development?
       ]
     ),
     Step.create(name: 'arroz', duration: 25.minutes,
-      notes: 'Antes de poner el arroz se sofríe con ajo, después se echa el tomate. El doble de agua que de arroz más un poco\nAl principio el fuego fuerte, a los 5 minutos se baja. Cuando apenas queda agua se cubre la sartén',
+      notes: "Antes de poner el arroz se sofríe con ajo, después se echa el tomate. El doble de agua que de arroz más un poco\nAl principio el fuego fuerte, a los 5 minutos se baja. Cuando apenas queda agua se cubre la sartén",
       quantities: [
         Quantity.create(unit: 'piece', amount: 2, ingredient: i('ajo')),
         Quantity.create(unit: 'cup', amount: 2, ingredient: i('arroz')),

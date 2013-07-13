@@ -61,7 +61,7 @@
             .span6
               - if step.notes.present?
                 %h4 Notes
-                %p= step.notes
+                = simple_format(step.notes)
 
 
 = link_to 'Edit', edit_recipe_path(@recipe)
