@@ -1,22 +1,24 @@
-= simple_form_for @recipe, html: { multipart: true, class: 'form-horizontal' } do |f|
+= simple_form_for @recipe, html: { multipart: true } do |f|
 
-  .control-group.fieldset
-    %legend Basic Info
-    .controls
-      = f.input :name
-      = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
+  .row-fluid.boxed.shadow.presentation
+    .span4
+    .span8
+      .row-fluid
+        .span8
+          = f.input :name
+        .span4
+          = duration_tag(@recipe.duration)
+      .row-fluid
+        = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
+        = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
+      .row-fluid
+        = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
 
   .control-group.fieldset
     %legend Picture
     .controls
       // TODO: fix this
-      = f.input :picture, as: :picture
-
-  .control-group.fieldset
-    %legend Categories
-    .controls
-      = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
-      = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
+      //= f.input :picture, as: :picture
 
   .control-group.fieldset
     %legend Steps
@@ -37,6 +39,34 @@
       = link_to recipes_path, class: 'btn' do
         %i.icon-remove
         Back
+
+
+  .boxed.shadow.accordion.steps-container
+    %h2 Steps
+    %hr
+
+    - @recipe.steps.each_with_index do |step,index|
+      .row-fluid.boxed.shadow.accordion-group.step
+        .accordion-heading
+          = duration_tag(step.duration || 0)
+          = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do
+            %h3= step.name
+
+        .collapse.accordion-body.in{ id: "collapse#{index}" }
+          .accordion-inner
+            .span6
+              - if step.quantities.any?
+                %h4 Ingredients
+                %ul.ingredients
+                  - step.quantities.each do |quantity|
+                    %li.ingredient
+                      %span= quantity.ingredient.name
+                      - if quantity.unit.present?
+                        = amount_tag(quantity.amount, quantity.unit)
+            .span6
+              - if step.notes.present?
+                %h4 Notes
+                = simple_format(step.notes)
 
 = render 'create_step'
 
