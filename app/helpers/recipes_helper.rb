@@ -18,7 +18,7 @@ module RecipesHelper
       'medium' => '',
       'difficult' => 'icon-thumbs-down'
     }
-    content_tag(:div, class: 'span6') do
+    content_tag(:div, class: 'span4') do
       content_tag(:span, difficulty, class: "pull-right label label-#{to_label[difficulty]}") +
       content_tag(:i, '', class: to_icon[difficulty])
     end

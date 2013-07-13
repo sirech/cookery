@@ -10,12 +10,12 @@
 %ul.thumbnails
   - @recipes.each do |recipe|
     %li.span3
-      = link_to recipe, class: 'thumbnail' do
+      = link_to recipe, class: 'thumbnail boxed shadow' do
         = main_picture_tag recipe
         %div.caption
           %h3= recipe.name
           %div.row-fluid
-            %div.span6.text-left= distance_of_time_in_words(recipe.duration)
+            = duration_tag(recipe.duration, class: 'text-left span8')
             = difficulty_tag recipe.difficulty
           %div.row-fluid
             - recipe.categories.each do |category|
