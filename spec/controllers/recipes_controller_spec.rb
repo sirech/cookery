@@ -97,6 +97,11 @@ describe RecipesController do
         post :create, recipe: attributes
         expect(assigns(:recipe).steps).to be_empty
       end
+
+      it 'automatically converts duration to minutes' do
+        post :create, recipe: attributes
+        expect(assigns(:recipe).duration).to eq(30.minutes)
+      end
     end
 
     describe 'update' do

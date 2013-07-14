@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :set_example_step, except: [:index, :destroy]
+  before_action :convert_duration, only: [:create, :update]
 
   # GET /recipes
   def index
@@ -75,6 +76,14 @@ class RecipesController < ApplicationController
       categories = params[:'extra-category'].split(/[ ,]/).map(&:strip).delete_if(&:blank?)
       categories = categories.map { |c| Category.where(name: c).first_or_create.id }
       params[:recipe][:category_ids] += categories
+    end
+  end
+
+  def convert_duration
+    if params[:recipe] && params[:recipe][:steps_attributes]
+      params[:recipe][:steps_attributes].each_value do |s|
+        s[:duration] = "#{s[:duration].to_i.minutes}" unless s[:duration].blank?
+      end
     end
   end
 
