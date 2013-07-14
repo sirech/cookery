@@ -30,8 +30,11 @@ describe RecipesController do
 
     let(:attributes) {
       FactoryGirl.attributes_for(:recipe_multi_step).tap do |r|
+        r[:steps_attributes] = Hash[r[:steps].map { |step| ["#{step.position-1}", { '_destroy' => '', 'name' => step.name, 'duration' => "#{step.duration / 60}"}] }]
         r[:steps] = r[:steps].map(&:id).join ','
         r[:category_ids] = r[:categories].map(&:id)
+
+        [:categories, :steps].each { |key| r.delete key }
       end
     }
 
@@ -77,7 +80,7 @@ describe RecipesController do
         end
       end
 
-      it 'creates the step hierarchy' do
+      it 'creates the steps' do
         post :create, recipe: attributes
         expect(assigns(:recipe).steps.map(&:name)).to eq(%w(prepare cook rest))
       end
@@ -89,8 +92,8 @@ describe RecipesController do
         end
       end
 
-      it 'does not create any step if the steps parameter is empty' do
-        attributes[:steps] = '[]'
+      it 'does not create any step if there are no steps in the request' do
+        attributes.delete :steps_attributes
         post :create, recipe: attributes
         expect(assigns(:recipe).steps).to be_empty
       end

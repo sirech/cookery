@@ -23,7 +23,6 @@ class RecipesController < ApplicationController
   # POST /recipes
   def create
     @recipe = Recipe.new(recipe_params)
-    add_steps
 
     respond_to do |format|
       if @recipe.save
@@ -66,7 +65,9 @@ class RecipesController < ApplicationController
 
   def recipe_params
     add_extra_categories
-    params.require(:recipe).permit(:name, :difficulty, :pictures, :category_ids => [])
+    params.require(:recipe).permit(:name, :difficulty, :pictures,
+      :category_ids => [],
+      :steps_attributes => [:_destroy, :name, :duration, :notes])
   end
 
   def add_extra_categories
@@ -74,21 +75,6 @@ class RecipesController < ApplicationController
       categories = params[:'extra-category'].split(/[ ,]/).map(&:strip).delete_if(&:blank?)
       categories = categories.map { |c| Category.where(name: c).first_or_create.id }
       params[:recipe][:category_ids] += categories
-    end
-  end
-
-  def add_steps
-    if params[:recipe][:steps] && params[:recipe][:steps] != '[]'
-      steps = Step.find(params[:recipe][:steps].split(','))
-
-      if steps.any?
-        @recipe.steps = steps
-
-        steps.map do |step|
-          step.recipe = @recipe
-          step.save
-        end
-      end
     end
   end
 
