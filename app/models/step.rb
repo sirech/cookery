@@ -3,6 +3,8 @@ class Step < ActiveRecord::Base
   acts_as_list scope: :recipe
 
   has_many :quantities
+  accepts_nested_attributes_for :quantities, reject_if: :all_blank, allow_destroy: true
+
   has_many :ingredients, through: :quantities
 
   include Named

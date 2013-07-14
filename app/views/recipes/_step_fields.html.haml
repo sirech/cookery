@@ -7,12 +7,22 @@
       %h3= f.input :name
     .span6
       = f.input :duration, wrapper: 'append' do
-        = f.input_field :duration, class: 'span9'
+        = f.input_field :duration, type: 'number', class: 'span9'
         %span.add-on minutes
 
   .row-fluid
     .span6
       %h4 Ingredients
+
+      = link_to_add_association f, :quantities, class: 'btn btn-success', 'data-association-insertion-method' => 'append' do
+        %i.icon-plus-sign.icon-white
+        Ingredient
+
+      %hr
+
+      .quantities
+        = f.simple_fields_for :quantities do |quantity|
+          = render 'quantity_fields', f: quantity
 
     .span6
       = f.input :notes, input_html: { rows: 5 }
