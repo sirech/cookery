@@ -68,7 +68,11 @@ class RecipesController < ApplicationController
     add_extra_categories
     params.require(:recipe).permit(:name, :difficulty, :pictures,
       :category_ids => [],
-      :steps_attributes => [:_destroy, :name, :duration, :notes])
+      :steps_attributes => [:_destroy, :name, :duration, :notes,
+        :quantities_attributes => [:_destroy, :ingredient_id, :amount, :unit,
+          :ingredient => [:name]
+        ]
+      ])
   end
 
   def add_extra_categories
