@@ -10,7 +10,7 @@
     };
   };
 
-  var picker_start = function(field_to_watch) {
+  var picker_start = function(field_to_watch, field_to_modify) {
 
     var names = [],
         ingredients = {};
@@ -31,6 +31,7 @@
           source: names,
           updater: function(item) {
             var id = ingredients[item].id;
+            this.$element.nextAll(field_to_modify).val(id);
             return item;
           }
         });
@@ -42,7 +43,7 @@
     $('*[rel=tooltip]').tooltip();
 
     // Typeahead for existing ingredients
-    var picker = picker_start('.ingredient_picker');
+    var picker = picker_start('.ingredient_picker', '.ingredient_picker_id');
     picker.activate('.quantity');
     // For new ingredients
     var find_ingredients = tracker('.quantities-container', picker.activate);
