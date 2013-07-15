@@ -1,7 +1,9 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   before_action :set_example_step, except: [:index, :destroy]
+
   before_action :convert_duration, only: [:create, :update]
+  before_action :check_ingredients, only: [:create, :update]
 
   # GET /recipes
   def index
@@ -24,7 +26,6 @@ class RecipesController < ApplicationController
   # POST /recipes
   def create
     @recipe = Recipe.new(recipe_params)
-
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
@@ -66,6 +67,7 @@ class RecipesController < ApplicationController
 
   def recipe_params
     add_extra_categories
+
     params.require(:recipe).permit(:name, :difficulty, :pictures,
       :category_ids => [],
       :steps_attributes => [:_destroy, :name, :duration, :notes,
@@ -87,6 +89,21 @@ class RecipesController < ApplicationController
     if params[:recipe] && params[:recipe][:steps_attributes]
       params[:recipe][:steps_attributes].each_value do |s|
         s[:duration] = "#{s[:duration].to_i.minutes}" unless s[:duration].blank?
+      end
+    end
+  end
+
+  def check_ingredients
+    return unless params[:recipe] && params[:recipe][:steps_attributes]
+
+    params[:recipe][:steps_attributes].each_value do |step|
+      next unless step[:quantities_attributes]
+
+      step[:quantities_attributes].each_value do |quantity|
+        if quantity[:ingredient_id].blank? && !quantity[:ingredient].blank?
+          quantity[:ingredient_id] = Ingredient.where(name: quantity[:ingredient]).first_or_create.id
+        end
+        quantity.delete :ingredient
       end
     end
   end

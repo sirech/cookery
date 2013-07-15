@@ -103,6 +103,16 @@ describe RecipesController do
       post :create, recipe: attributes
       expect(assigns(:recipe).steps.first.ingredients).not_to be_empty
     end
+
+    it 'creates a new ingredient if the id is not there' do
+      attributes[:steps_attributes]['0']['quantities_attributes']['0'].tap do |h|
+        h.delete 'ingredient_id'
+        h['ingredient'] = 'unknown'
+      end
+
+      post :create, recipe: attributes
+      expect(Ingredient.find_by_name('unknown')).not_to be_nil
+    end
   end
 
   describe 'update' do
