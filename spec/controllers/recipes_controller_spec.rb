@@ -93,6 +93,16 @@ describe RecipesController do
       post :create, recipe: attributes
       expect(assigns(:recipe).duration).to eq(30.minutes)
     end
+
+    it 'creates the quantities' do
+      post :create, recipe: attributes
+      expect(assigns(:recipe).steps.first.quantities).not_to be_empty
+    end
+
+    it 'allows access to the ingredients' do
+      post :create, recipe: attributes
+      expect(assigns(:recipe).steps.first.ingredients).not_to be_empty
+    end
   end
 
   describe 'update' do
