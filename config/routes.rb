@@ -5,8 +5,6 @@ Cookery::Application.routes.draw do
 
   resources :categories, only: ['create']
 
-  resources :steps, only: ['create']
-
   resources :ingredients, only: ['index', 'create']
 
   # The priority is based upon order of creation: first created -> highest priority.
