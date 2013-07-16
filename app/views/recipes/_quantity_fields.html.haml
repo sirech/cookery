@@ -1,7 +1,7 @@
 .nested-fields.quantity.boxed
   .control-group
     .controls.form-inline
-      = f.input_field :ingredient, placeholder: 'Ingredient...', label: false, class: 'ingredient_picker'
+      = f.input_field :ingredient, placeholder: 'Ingredient...', label: false, class: 'ingredient_picker', autocomplete: 'off'
       = f.hidden_field :ingredient_id, class: 'ingredient_picker_id'
       = f.input_field :amount, type: 'number', label: false, class: 'short-input'
       = f.input_field :unit, collection: Quantity.units, default: 1, label: false, class: 'short-input'
