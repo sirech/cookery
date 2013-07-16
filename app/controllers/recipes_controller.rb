@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :set_example_step, except: [:index, :destroy]
 
   before_action :convert_duration, only: [:create, :update]
   before_action :check_ingredients, only: [:create, :update]
@@ -59,10 +58,6 @@ class RecipesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_recipe
     @recipe = Recipe.find(params[:id])
-  end
-
-  def set_example_step
-    @example_step = Step.new
   end
 
   def recipe_params
