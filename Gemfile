@@ -36,6 +36,9 @@ gem 'foreigner'
 # Add ordered lists
 gem 'acts_as_list'
 
+# Authorization
+gem 'devise', '3.0.0.rc'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
