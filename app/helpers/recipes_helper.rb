@@ -41,4 +41,13 @@ module RecipesHelper
       content_tag(:i, '', class: 'icon-time')
     end
   end
+
+  def add_association_button(f, association)
+    link_to_add_association f, association, class: 'btn btn-success',
+                            'data-association-insertion-node' => ".#{association}-container",
+                            'data-association-insertion-method' => 'append' do
+      content_tag(:i, '', class: 'icon-plus-sign icon-white') +
+      association.to_s.singularize.titlecase
+    end
+  end
 end

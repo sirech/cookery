@@ -23,9 +23,7 @@
   .boxed.shadow.steps-container
     %h2 Steps
 
-    = link_to_add_association f, :steps, class: 'btn btn-success', 'data-association-insertion-node' => '.steps-container', 'data-association-insertion-method' => 'append' do
-      %i.icon-plus-sign.icon-white
-      Step
+    = add_association_button f, :steps
 
     %hr
 
@@ -37,9 +35,7 @@
     %h3
       Videos
 
-    = link_to_add_association f, :videos, class: 'btn btn-success', 'data-association-insertion-node' => '.videos-container', 'data-association-insertion-method' => 'append' do
-      %i.icon-plus-sign.icon-white
-      Video
+    = add_association_button f, :videos
 
     %hr
 
