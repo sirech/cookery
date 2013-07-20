@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe RecipesController do
   include AttributesHelper
+  include CreateHelper
 
   before(:each) do
     [
@@ -51,13 +52,6 @@ describe RecipesController do
       end
     end
 
-    it 'adds new categories' do
-      post :create, recipe: attributes
-
-      expect(assigns(:recipe).valid?).to be_true
-      expect(assigns(:recipe).categories).not_to be_empty
-    end
-
     [
       'tag1, tag2, tag3',
       'tag1 tag2 tag3',
@@ -94,16 +88,6 @@ describe RecipesController do
       expect(assigns(:recipe).duration).to eq(30.minutes)
     end
 
-    it 'creates the quantities' do
-      post :create, recipe: attributes
-      expect(assigns(:recipe).steps.first.quantities).not_to be_empty
-    end
-
-    it 'allows access to the ingredients' do
-      post :create, recipe: attributes
-      expect(assigns(:recipe).steps.first.ingredients).not_to be_empty
-    end
-
     it 'creates a new ingredient if the id is not there' do
       attributes[:steps_attributes]['0']['quantities_attributes']['0'].tap do |h|
         h.delete 'ingredient_id'
@@ -113,6 +97,11 @@ describe RecipesController do
       post :create, recipe: attributes
       expect(Ingredient.find_by_name('unknown')).not_to be_nil
     end
+
+    it_behaves_like 'create relations', Recipe, :categories
+    it_behaves_like 'create relations', Recipe, :videos
+    it_behaves_like 'create relations', Recipe, :quantities, :steps, :first
+    it_behaves_like 'create relations', Recipe, :ingredients, :steps, :first
   end
 
   describe 'update' do

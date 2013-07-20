@@ -33,6 +33,20 @@
       = f.simple_fields_for :steps do |step|
         = render 'step_fields', f: step
 
+  .boxed.shadow.videos-container
+    %h3
+      Videos
+
+    = link_to_add_association f, :videos, class: 'btn btn-success', 'data-association-insertion-node' => '.videos-container', 'data-association-insertion-method' => 'append' do
+      %i.icon-plus-sign.icon-white
+      Video
+
+    %hr
+
+    .videos
+      = f.simple_fields_for :videos do |video|
+        = render 'video_fields', f: video
+
   .boxed.shadow
     .row-fluid
       .span5

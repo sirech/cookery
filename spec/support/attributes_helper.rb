@@ -6,8 +6,9 @@ module AttributesHelper
     FactoryGirl.attributes_for(factory).tap do |r|
       r[:steps_attributes] = steps_as_request(r[:steps])
       r[:category_ids] = r[:categories].map(&:id)
+      r[:videos_attributes] = videos_as_request(r[:videos])
 
-      [:categories, :steps].each { |key| r.delete key }
+      [:categories, :steps, :videos].each { |key| r.delete key }
     end
   end
 
@@ -43,4 +44,13 @@ module AttributesHelper
     end
   end
 
+  def videos_as_request(videos)
+    generate_hash_list(videos) do |video|
+      raise ArgumentError.new "Invalid argument #{video}" unless video.is_a? Video
+      {
+        '_destroy' => '',
+        'url' => video.url
+      }
+    end
+  end
 end
