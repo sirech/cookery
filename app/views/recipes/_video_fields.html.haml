@@ -1,6 +1,7 @@
 .nested-fields.boxed.video
   .control-group
     .controls.form-inline
-      = f.input_field :url, placeholder: 'URL: https://youtube.com/...'
+      = f.input_field :url, class: 'video-input', placeholder: 'URL: https://youtube.com/...'
+      %span.video-output
       = link_to_remove_association f, class: 'pull-right' do
         %i.icon-remove

@@ -39,6 +39,30 @@
     };
   };
 
+  var video_info = function(field_to_watch, field_to_modify) {
+
+    var video_id = function(url) {
+      var parts = url.split('/'),
+          last = parts[parts.length - 1];
+
+      last = last.replace('watch?v=', '');
+      return last;
+    };
+
+    return {
+      activate: function() {
+        $(document).on('change', field_to_watch, function() {
+          $.ajax({
+            url: 'http://gdata.youtube.com/feeds/api/videos/' + video_id($(this).val()) + '?v=2&alt=json-in-script',
+            dataType: 'jsonp'})
+            .done(function(data, status, xhr) {
+              $(field_to_modify).html(data.entry.title.$t);
+            })
+        });
+      }
+    };
+  };
+
   $(function() {
     $('*[rel=tooltip]').tooltip();
 
@@ -57,5 +81,7 @@
       picker.activate(step);
     });
     find_steps.track('body');
+
+    video_info('.video .video-input', '.video-output').activate();
   });
 })();
