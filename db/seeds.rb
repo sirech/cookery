@@ -10,6 +10,10 @@ if Rails.env.development?
     Category.where(name: categories)
   end
 
+  def videos(*urls)
+    urls.map { |url| Video.create(url: url) }
+  end
+
   %w(aceite ajo sal pimienta agua soja jengibre chili cebolla pimiento zanahoria patata pollo costilla carne salmón avecrem tomate harina azúcar alcachofa arroz guisante chorizo pimentón salmón).each do |ingredient|
     Ingredient.create name: ingredient
   end
@@ -29,7 +33,7 @@ if Rails.env.development?
 
                 pictures: (['pan.png'] * 3).map { |n| Picture.create(caption: 'pic', photo: Rails.root.join('spec', 'fixtures', n).open) },
 
-                videos: ['https://www.youtube.com/embed/T-eDbjeTA3E'],
+                videos: videos('https://www.youtube.com/embed/T-eDbjeTA3E'),
 
                 steps: [
     Step.create(name: 'dorar', duration: 10.minutes,
@@ -71,7 +75,7 @@ if Rails.env.development?
 
                 categories: categories('español'),
 
-                videos: ['https://www.youtube.com/embed/pXXMaVzINt4'],
+                videos: videos('https://www.youtube.com/embed/pXXMaVzINt4'),
 
                 steps: [
     Step.create(name: 'cocer', duration: 25.minutes,
@@ -93,7 +97,7 @@ if Rails.env.development?
                 difficulty: 'medium',
                 categories: categories('asia', 'arroz'),
 
-                videos: ['https://www.youtube.com/watch?v=I4vMelOsHfg', 'https://www.youtube.com/watch?v=aH2TPCuSH5s', 'https://www.youtube.com/watch?v=K729GqTf2pk'],
+                videos: videos('https://www.youtube.com/watch?v=I4vMelOsHfg', 'https://www.youtube.com/watch?v=aH2TPCuSH5s', 'https://www.youtube.com/watch?v=K729GqTf2pk'),
 
                 steps: [
 

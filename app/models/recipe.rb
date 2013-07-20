@@ -10,18 +10,8 @@ class Recipe < ActiveRecord::Base
   has_many :steps, -> { order('position') }
   accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
 
-  serialize :videos, Array
-  validate :video_is_url
-
-  before_save do |recipe|
-    recipe.videos.map! do |video|
-      if video =~ /\/watch\?v=/
-        video.sub('watch?v=', 'embed/')
-      else
-        video
-      end
-    end
-  end
+  has_many :videos
+  accepts_nested_attributes_for :videos, reject_if: :all_blank, allow_destroy: true
 
   # Difficulty
   DIFFICULTY_LEVELS = %w(easy medium difficult).freeze
@@ -45,22 +35,5 @@ class Recipe < ActiveRecord::Base
 
   def ingredients
     steps.map(&:ingredients).flatten.uniq
-  end
-
-  protected
-
-  def video_is_url
-    videos.each do |video|
-      errors.add(:videos, "#{video} is not a valid url for a video") unless uri?(video)
-    end
-  end
-
-  def uri?(url)
-    uri = URI.parse(url)
-    %w( http https ).include?(uri.scheme) && uri.host.include?('youtube')
-  rescue URI::BadURIError
-    false
-  rescue URI::InvalidURIError
-    false
   end
 end

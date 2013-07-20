@@ -54,28 +54,9 @@ describe Recipe do
   end
 
   describe '#videos' do
-    it 'should reject things that are not urls' do
-      recipe.videos << 'test'
-      expect(recipe.valid?).to be_false
-    end
-
-    it 'should reject non-youtube urls' do
-      recipe.videos << 'http://vimeo.com'
-      expect(recipe.valid?).to be_false
-    end
-
-    it 'should rewrite videos that can not be embedded' do
-      recipe.videos << 'https://youtube.com/watch?v=T-eDbjeTA'
-
-      recipe.save
-      recipe.reload
-
-      expect(recipe.videos.first).to_not match(/watch/)
-    end
-
     it 'should be able to store urls' do
-      recipe.videos << 'http://youtube.com'
-      recipe.videos << 'https://youtube.com'
+      recipe.videos << Video.new(url: 'http://youtube.com')
+      recipe.videos << Video.new(url: 'https://youtube.com')
 
       recipe.save
       recipe.reload
