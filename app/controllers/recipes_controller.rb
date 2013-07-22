@@ -70,7 +70,8 @@ class RecipesController < ApplicationController
           ingredient: [:name]
         ]
       ],
-      videos_attributes: [:_destroy, :url]
+      videos_attributes: [:_destroy, :url],
+      pictures_attributes: [:_destroy, :photo]
     )
   end
 

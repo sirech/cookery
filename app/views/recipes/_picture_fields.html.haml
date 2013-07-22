@@ -1,0 +1,6 @@
+.nested-fields.video
+  .control-group
+    .controls.form-inline
+      = f.input :photo, as: :picture
+      = link_to_remove_association f, class: 'pull-right' do
+        %i.icon-remove
