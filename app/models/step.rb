@@ -8,6 +8,6 @@ class Step < ActiveRecord::Base
   has_many :ingredients, through: :quantities
   accepts_nested_attributes_for :ingredients, reject_if: :all_blank, allow_destroy: true
 
-  include Named
+  include IsNamed
   validates_numericality_of :duration, greater_than_or_equal_to: 0
 end
