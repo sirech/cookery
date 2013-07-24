@@ -27,6 +27,8 @@ gem 'paperclip', '~> 3.0'
 # Forms
 gem 'simple_form', '~> 3.0.0.rc'
 gem 'cocoon', '~> 1.2.0'
+gem 'client_side_validations', git: 'git://github.com/bcardarella/client_side_validations.git', branch: '4-0-beta'
+gem 'client_side_validations-simple_form', git: 'git://github.com/saveritemedical/client_side_validations-simple_form.git'
 
 ### DB
 
