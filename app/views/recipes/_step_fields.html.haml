@@ -8,11 +8,11 @@
     .span6
       = f.input :duration, wrapper: 'append' do
         = f.input_field :duration, type: 'number', class: 'span9'
-        %span.add-on minutes
+        %span.add-on= t('duration.minutes')
 
   .row-fluid
     .span6.quantities-container
-      %h4 Ingredients
+      %h4= t('ingredients')
 
       = add_association_button f, :quantities
 

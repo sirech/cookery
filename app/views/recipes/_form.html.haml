@@ -15,13 +15,13 @@
         .span4
           = duration_tag(@recipe.duration)
       .row-fluid
-        = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Select one or multiple categories from the list'}
-        = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
+        = f.association :categories, collection: Category.order(:name).load, input_html: { rel: 'tooltip', 'data-toogle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => t('categories.tooltip')}
+        = text_field_tag :'extra-category', nil, placeholder: t('extra-category.placeholder'), class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => t('extra-category.tooltip')
       .row-fluid
         = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
 
   .boxed.shadow.steps-container
-    %h2 Steps
+    %h2= t('steps')
 
     = add_association_button f, :steps
 
@@ -32,8 +32,7 @@
         = render 'step_fields', f: step
 
   .boxed.shadow.videos-container
-    %h3
-      Videos
+    %h3= t('videos')
 
     = add_association_button f, :videos
 
@@ -49,7 +48,7 @@
       .span7
         = button_tag type: :submit, class: 'controls btn btn-primary' do
           %i.icon-ok.icon-white
-          Save
+          = t('button.save')
         = link_to recipes_path, class: 'btn' do
           %i.icon-remove
-          Back
+          = t('button.back')

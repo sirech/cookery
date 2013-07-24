@@ -1,5 +1,5 @@
 = content_for :title do
-  = "Recipe - #{@recipe.name}"
+  = "#{t('recipe.name')} - #{@recipe.name}"
 
 .container-fluid
   .row-fluid.boxed.shadow.presentation
@@ -34,15 +34,15 @@
           = duration_tag(@recipe.duration)
       .row-fluid
         - if @recipe.categories.any?
-          %h4 Categories
+          %h4= t('categories.name')
           - @recipe.categories.each do |category|
             %span.badge.badge-info= category.name
       .row-fluid
-        %h4 Difficulty
+        %h4= t('difficulty')
         = difficulty_tag(@recipe.difficulty)
 
   .boxed.shadow.accordion.steps-container
-    %h2 Steps
+    %h2= t('steps')
     %hr
 
     - @recipe.steps.each_with_index do |step,index|
@@ -56,7 +56,7 @@
           .accordion-inner
             .span6
               - if step.quantities.any?
-                %h4 Ingredients
+                %h4= t('ingredients')
                 %ul.ingredients
                   - step.quantities.each do |quantity|
                     %li.ingredient
@@ -65,12 +65,12 @@
                         = amount_tag(quantity.amount, quantity.unit)
             .span6
               - if step.notes.present?
-                %h4 Notes
+                %h4= t('notes')
                 = simple_format(step.notes)
 
   - if @recipe.videos.any?
     .boxed.shadow.videos-container
-      %h2 Videos
+      %h2= t('videos')
       %hr
 
       %ul.thumbnails

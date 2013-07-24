@@ -23,4 +23,8 @@ en:
     #   defaults:
     #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
+    placeholders:
+      defaults:
+        ingredient: 'Ingredient...'
+        url: 'URL: https://youtube.com/...'
 

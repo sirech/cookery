@@ -20,4 +20,28 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  button:
+    save: 'Save'
+    back: 'Back'
+
+  categories:
+    name: 'Categories'
+    tooltip: 'Select one or multiple categories from the list'
+
+  difficulty: 'Difficulty'
+
+  duration:
+    minutes: 'minutes'
+
+  extra-category:
+    placeholder: 'Extra: Category1, Category2, Category3'
+    tooltip: 'Add extra categories by writing them here'
+
+
+  ingredients: 'Ingredients'
+  notes: 'Notes'
+  recipe:
+    name: 'Recipe'
+    new: 'New recipe'
+  steps: 'Steps'
+  videos: 'Videos'
