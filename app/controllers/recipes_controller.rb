@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-  before_action :set_example_step, except: [:index, :destroy]
 
   before_action :convert_duration, only: [:create, :update]
   before_action :check_ingredients, only: [:create, :update]
@@ -63,20 +62,19 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
-  def set_example_step
-    @example_step = Step.new
-  end
-
   def recipe_params
     add_extra_categories
 
     params.require(:recipe).permit(:name, :difficulty, :pictures,
-      :category_ids => [],
-      :steps_attributes => [:_destroy, :name, :duration, :notes,
-        :quantities_attributes => [:_destroy, :ingredient_id, :amount, :unit,
-          :ingredient => [:name]
+      category_ids: [],
+      steps_attributes: [:_destroy, :name, :duration, :notes,
+        quantities_attributes: [:_destroy, :ingredient_id, :amount, :unit,
+          ingredient: [:name]
         ]
-      ])
+      ],
+      videos_attributes: [:_destroy, :url],
+      pictures_attributes: [:_destroy, :photo]
+    )
   end
 
   def add_extra_categories

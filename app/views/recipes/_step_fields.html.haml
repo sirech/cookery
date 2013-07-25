@@ -14,9 +14,7 @@
     .span6.quantities-container
       %h4 Ingredients
 
-      = link_to_add_association f, :quantities, class: 'btn btn-success', 'data-association-insertion-method' => 'append' do
-        %i.icon-plus-sign.icon-white
-        Ingredient
+      = add_association_button f, :quantities
 
       %hr
 

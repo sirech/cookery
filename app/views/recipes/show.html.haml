@@ -76,7 +76,7 @@
       %ul.thumbnails
         - @recipe.videos.each do |video|
           %li.boxed.video
-            = youtube_video video
+            = youtube_video video.url
 
 = link_to 'Edit', edit_recipe_path(@recipe)
 \|

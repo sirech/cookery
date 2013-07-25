@@ -1,7 +1,13 @@
 = simple_form_for @recipe, html: { multipart: true } do |f|
 
   .row-fluid.boxed.shadow.presentation
-    .span4
+    .span4.pictures-container
+
+      = add_association_button f, :pictures
+
+      = f.simple_fields_for :pictures do |picture|
+        = render 'picture_fields', f: picture
+
     .span8
       .row-fluid
         .span8
@@ -14,23 +20,28 @@
       .row-fluid
         = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
 
-  .control-group.fieldset
-    %legend Picture
-    .controls
-      // TODO: fix this
-      //= f.input :picture, as: :picture
-
   .boxed.shadow.steps-container
     %h2 Steps
 
-    = link_to_add_association f, :steps, class: 'btn btn-success', 'data-association-insertion-node' => '.steps-container', 'data-association-insertion-method' => 'append' do
-      %i.icon-plus-sign.icon-white
-      Step
+    = add_association_button f, :steps
 
     %hr
 
-    = f.simple_fields_for :steps do |step|
-      = render 'step_fields', f: step
+    .steps
+      = f.simple_fields_for :steps do |step|
+        = render 'step_fields', f: step
+
+  .boxed.shadow.videos-container
+    %h3
+      Videos
+
+    = add_association_button f, :videos
+
+    %hr
+
+    .videos
+      = f.simple_fields_for :videos do |video|
+        = render 'video_fields', f: video
 
   .boxed.shadow
     .row-fluid

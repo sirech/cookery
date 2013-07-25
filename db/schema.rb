@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20130718122555) do
     t.integer "category_id"
   end
 
+  add_index "categories_recipes", ["category_id"], name: "index_categories_recipes_on_category_id"
+  add_index "categories_recipes", ["recipe_id"], name: "index_categories_recipes_on_recipe_id"
+
   create_table "ingredients", force: true do |t|
     t.string   "name"
     t.string   "found_at"
@@ -60,7 +63,6 @@ ActiveRecord::Schema.define(version: 20130718122555) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "difficulty"
-    t.text     "videos"
   end
 
   create_table "steps", force: true do |t|
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(version: 20130718122555) do
 
   add_index "steps", ["recipe_id"], name: "index_steps_on_recipe_id"
 
+<<<<<<< HEAD
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -92,5 +95,12 @@ ActiveRecord::Schema.define(version: 20130718122555) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "videos", force: true do |t|
+    t.integer "recipe_id"
+    t.string  "url"
+  end
+
+  add_index "videos", ["recipe_id"], name: "index_videos_on_recipe_id"
 
 end
