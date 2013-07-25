@@ -4,8 +4,6 @@ class RecipesController < ApplicationController
   before_action :convert_duration, only: [:create, :update]
   before_action :check_ingredients, only: [:create, :update]
 
-  before_action :authenticate_user!, except: [:show, :index]
-
   # GET /recipes
   def index
     @recipes = Recipe.order(sort_parameters).page(params[:page])

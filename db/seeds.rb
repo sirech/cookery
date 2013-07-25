@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+%w(admin member).each do |role|
+  Role.create name: role
+end
+
 if Rails.env.development?
 
   def i(name)
