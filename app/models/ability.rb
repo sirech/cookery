@@ -8,11 +8,13 @@ class Ability
       can :manage, :all
     elsif user.is? :member
       can :read, Recipe
+      can :create, Recipe
 
       can :manage, Recipe do |recipe|
         recipe.try(:author) == user
       end
     else
       can :read, Recipe
+    end
   end
 end

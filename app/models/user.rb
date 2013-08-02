@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
 
+  has_many :recipes
+
   def is?(role)
     self.roles.find_by_name(role.to_s)
   end

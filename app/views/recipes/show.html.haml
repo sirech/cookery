@@ -78,6 +78,7 @@
           %li.boxed.video
             = youtube_video video.url
 
-= link_to 'Edit', edit_recipe_path(@recipe)
-\|
+- if can? :edit, Recipe
+  = link_to 'Edit', edit_recipe_path(@recipe)
+  \|
 = link_to 'Back', recipes_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130725075653) do
+ActiveRecord::Schema.define(version: 20130726101050) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -63,7 +63,10 @@ ActiveRecord::Schema.define(version: 20130725075653) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "difficulty"
+    t.integer  "user_id"
   end
+
+  add_index "recipes", ["user_id"], name: "index_recipes_on_user_id"
 
   create_table "roles", force: true do |t|
     t.string   "name"
