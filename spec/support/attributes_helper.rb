@@ -8,7 +8,7 @@ module AttributesHelper
       r[:category_ids] = r[:categories].map(&:id)
       r[:videos_attributes] = videos_as_request(r[:videos])
 
-      [:categories, :steps, :videos].each { |key| r.delete key }
+      [:author, :categories, :steps, :videos].each { |key| r.delete key }
     end
   end
 
