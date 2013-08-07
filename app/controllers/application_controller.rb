@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   # Rails 4 strong parameters is incompatible with CanCan
   before_filter do
-    resource = controller_name.singularize.to_sym
+    resource = controller_path.singularize.gsub('/', '_').to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end

@@ -62,8 +62,7 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(:name, :difficulty, :pictures,
       category_ids: [],
       steps_attributes: [:_destroy, :name, :duration, :notes,
-        quantities_attributes: [:_destroy, :ingredient_id, :amount, :unit,
-          ingredient: [:name]
+        quantities_attributes: [:_destroy, :ingredient_id, :ingredient, :amount, :unit,
         ]
       ],
       videos_attributes: [:_destroy, :url],
