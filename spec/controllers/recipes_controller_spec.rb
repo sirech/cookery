@@ -14,7 +14,7 @@ describe RecipesController do
       ['Lentejas', 'easy'],
       ['huevo frito', 'difficult']
     ].each do |name, difficulty|
-      FactoryGirl.create(:recipe, name: name, difficulty: difficulty)
+      FactoryGirl.create(:recipe, name: name, difficulty: difficulty, author: user)
     end
   end
 

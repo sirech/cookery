@@ -6,7 +6,8 @@ describe Recipe do
     Recipe.create name: 'Lasagna',
                   difficulty: 'medium',
                   categories: [FactoryGirl.build(:category)],
-                  steps: [:step_first, :step_cook, :step_last].map { |s| FactoryGirl.create(s) }
+                  steps: [:step_first, :step_cook, :step_last].map { |s| FactoryGirl.create(s) },
+                  author: FactoryGirl.create(:user)
   end
 
   describe '#picture' do

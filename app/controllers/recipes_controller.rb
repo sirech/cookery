@@ -24,6 +24,8 @@ class RecipesController < ApplicationController
 
   # POST /recipes
   def create
+    @recipe.author = current_user
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
