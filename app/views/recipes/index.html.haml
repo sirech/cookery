@@ -1,11 +1,9 @@
-%div.well
-  %div.container-fluid
-    %div.row-fluid
-      %div.span12
-        %h1 Recipes
-        = link_to new_recipe_path, class: 'btn btn-large btn-success' do
-          %i.icon-plus-sign.icon-white
-          Add Recipe
+= content_for :well do
+  %h1 Recipes
+  - if can? :create, Recipe
+    = link_to new_recipe_path, class: 'btn btn-large btn-success' do
+      %i.icon-plus-sign.icon-white
+      Add Recipe
 
 %ul.thumbnails
   - @recipes.each do |recipe|

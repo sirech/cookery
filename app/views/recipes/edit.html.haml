@@ -1,10 +1,4 @@
-%div.well
-  %div.container-fluid
-    %div.row-fluid
-      %div.span12
-        %h1 Editing recipe
+= content_for :well do
+  %h1 Editing Recipe
 
 = render 'form'
-
-= link_to 'Show', @recipe
-\|
