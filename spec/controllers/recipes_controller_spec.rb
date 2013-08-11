@@ -3,14 +3,18 @@ require 'spec_helper'
 describe RecipesController do
   include AttributesHelper
   include CreateHelper
+  include Devise::TestHelpers
 
   before(:each) do
+    user = FactoryGirl.create(:user)
+    sign_in user
+
     [
       ['paella', 'medium'],
       ['Lentejas', 'easy'],
       ['huevo frito', 'difficult']
     ].each do |name, difficulty|
-      FactoryGirl.create(:recipe, name: name, difficulty: difficulty)
+      FactoryGirl.create(:recipe, name: name, difficulty: difficulty, author: user)
     end
   end
 

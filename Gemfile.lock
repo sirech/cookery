@@ -29,9 +29,11 @@ GEM
       activerecord (>= 3.0)
     arel (4.0.0)
     atomic (1.1.10)
+    bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     builder (3.1.4)
+    cancan (1.6.10)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -53,6 +55,11 @@ GEM
     coffee-script-source (1.6.2)
     daemons (1.1.9)
     database_cleaner (1.0.1)
+    devise (3.0.0.rc)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.1)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -122,6 +129,7 @@ GEM
     net-ssh (2.6.8)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    orm_adapter (0.4.0)
     paperclip (3.4.2)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -212,6 +220,8 @@ GEM
     uglifier (2.1.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.1)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -219,9 +229,11 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   bootstrap-sass (~> 2.3.2.0)
+  cancan (~> 1.6)
   capistrano
   cocoon (~> 1.2.0)
   database_cleaner
+  devise (= 3.0.0.rc)
   factory_girl_rails
   foreigner
   guard

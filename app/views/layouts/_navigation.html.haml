@@ -1,1 +1,25 @@
+= link_to '#', class: 'btn btn-navbar', 'data-toggle' => 'collapse', 'data-target' => '.nav-collapse' do
+  - 3.times do
+    %span.icon-bar
+
 = link_to 'Cookery', root_path, class: 'brand'
+
+.nav-collapse
+
+  %ul.nav.pull-right
+    - if user_signed_in?
+      %li
+        Signed as #{current_user.email}
+      %li
+        = link_to 'Sign out', destroy_user_session_path, method: :delete
+    - else
+      %li
+        = link_to 'Sign up', new_user_registration_path
+      %li.divider-vertical
+      %li.dropdown
+        = link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown' do
+          Sign In
+          %strong.caret
+
+        .dropdown-menu
+          = render 'devise/sessions/form', extra_class: 'popup-form', resource: User.new, resource_name: 'user'

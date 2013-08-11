@@ -1,4 +1,16 @@
 FactoryGirl.define do
+  factory :role do
+    name 'member'
+    initialize_with { Role.find_or_create_by(name: name) }
+  end
+
+  factory :user do
+    sequence(:email) { |n| "user_#{n}@cookery.com" }
+    password 'qwerasdf'
+
+    roles { [FactoryGirl.create(:role)] }
+  end
+
   factory :ingredient do
     sequence(:name) { |n| "Ingredient[#{n}]" }
     found_at 'Rewe'
@@ -55,6 +67,7 @@ FactoryGirl.define do
   end
 
   factory :recipe do
+    author { FactoryGirl.create(:user) }
     sequence(:name) { |n| "Recipe[#{n}]" }
     difficulty 'medium'
 

@@ -25,5 +25,12 @@ module Cookery
 
     # Rails 4 does not compile images in vendor/lib
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+    # Generators
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.template_engine :haml
+    end
   end
 end

@@ -1,11 +1,12 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
-
   before_action :convert_duration, only: [:create, :update]
   before_action :check_ingredients, only: [:create, :update]
 
+  load_and_authorize_resource except: [:index]
+
   # GET /recipes
   def index
+    authorize! :index, Recipe
     @recipes = Recipe.order(sort_parameters).page(params[:page])
   end
 
@@ -15,7 +16,6 @@ class RecipesController < ApplicationController
 
   # GET /recipes/new
   def new
-    @recipe = Recipe.new
   end
 
   # GET /recipes/1/edit
@@ -24,7 +24,8 @@ class RecipesController < ApplicationController
 
   # POST /recipes
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe.author = current_user
+
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: 'Recipe was successfully created.' }
@@ -55,19 +56,13 @@ class RecipesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_recipe
-    @recipe = Recipe.find(params[:id])
-  end
-
   def recipe_params
     add_extra_categories
 
     params.require(:recipe).permit(:name, :difficulty, :pictures,
       category_ids: [],
       steps_attributes: [:_destroy, :name, :duration, :notes,
-        quantities_attributes: [:_destroy, :ingredient_id, :amount, :unit,
-          ingredient: [:name]
+        quantities_attributes: [:_destroy, :ingredient_id, :ingredient, :amount, :unit,
         ]
       ],
       videos_attributes: [:_destroy, :url],
