@@ -20,7 +20,7 @@ after 'deploy:restart', 'deploy:cleanup'
 
 before "deploy:assets:precompile", "bundle:install"
 
-after 'deploy:update_code', 'deploy:symlink_db'
+after 'deploy:finalize_update', 'deploy:symlink_db'
 
 namespace :deploy do
   desc 'Symlinks the database.yml'
