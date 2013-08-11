@@ -16,6 +16,8 @@ server 'erza', :app, :web, :db, :primary => true
 # if you want to clean up old releases on each deploy uncomment this:
 after 'deploy:restart', 'deploy:cleanup'
 
+before "deploy:assets:precompile", "bundle:install"
+
 after 'deploy:update_code', 'deploy:symlink_db'
 
 namespace :deploy do
