@@ -16,6 +16,8 @@ def videos(*urls)
   urls.map { |url| Video.create(url: url) }
 end
 
+puts "Creating ingredients"
+
 %w(aceite ajo sal pimienta agua soja jengibre chili cebolla pimiento zanahoria patata pollo costilla carne salmón avecrem tomate harina azúcar alcachofa arroz guisante chorizo pimentón salmón).each do |ingredient|
   Ingredient.create name: ingredient
 end
