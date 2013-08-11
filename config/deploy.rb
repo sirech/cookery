@@ -4,6 +4,7 @@ set :repository,  'https://github.com/sirech/cookery.git'
 set :scm, :git
 
 set :user, 'sirech'
+set :group, 'cook'
 set :use_sudo, false
 
 set :deploy_to, "/srv/www/#{application}"
