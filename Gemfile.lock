@@ -237,6 +237,7 @@ DEPENDENCIES
   paperclip (~> 3.0)
   pg
   rails (= 4.0.0)
+  rake
   rb-fsevent
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0)
