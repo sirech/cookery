@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, 'cookery'
 set :repository,  'https://github.com/sirech/cookery.git'
 
