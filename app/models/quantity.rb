@@ -4,7 +4,7 @@ class Quantity < ActiveRecord::Base
 
   validates_numericality_of :amount, greater_than_or_equal_to: 0
 
-  UNITS = %w(pinch cup teaspoon tablespoon ml piece).sort.freeze
+  UNITS = %w(pinch cup teaspoon tablespoon ml gr piece).sort.freeze
   validates_inclusion_of :unit, in: UNITS, allow_blank: true
 
   def self.units
