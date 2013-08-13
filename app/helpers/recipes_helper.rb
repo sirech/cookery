@@ -44,7 +44,9 @@ module RecipesHelper
 
   def add_association_button(f, association)
     link_to_add_association f, association, class: 'btn btn-success',
-                            'data-association-insertion-node' => ".#{association}-container",
+                            force_non_association_create: f.object.send(association).any?,
+                            'data-association-insertion-traversal' => 'siblings',
+                            'data-association-insertion-node' => ".#{association}",
                             'data-association-insertion-method' => 'append' do
       content_tag(:i, '', class: 'icon-plus-sign icon-white') +
       association.to_s.singularize.titlecase

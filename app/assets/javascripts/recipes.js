@@ -52,12 +52,20 @@
     return {
       activate: function() {
         $(document).on('change', field_to_watch, function() {
-          $.ajax({
-            url: 'http://gdata.youtube.com/feeds/api/videos/' + video_id($(this).val()) + '?v=2&alt=json-in-script',
-            dataType: 'jsonp'})
-            .done(function(data, status, xhr) {
-              $(field_to_modify).html(data.entry.title.$t);
-            })
+          var video = $(this).val(),
+              output = $(this).parent().find(field_to_modify);
+
+          if(video == "") {
+            output.html("");
+          } else {
+            $.ajax({
+              url: 'http://gdata.youtube.com/feeds/api/videos/' + video_id(video) + '?v=2&alt=json-in-script',
+              dataType: 'jsonp'})
+              .done(function(data, status, xhr) {
+                console.log($(this));
+                output.html(data.entry.title.$t);
+              });
+          }
         });
       }
     };
