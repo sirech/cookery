@@ -44,6 +44,7 @@ module RecipesHelper
 
   def add_association_button(f, association)
     link_to_add_association f, association, class: 'btn btn-success',
+                            force_non_association_create: f.object.send(association).any?,
                             'data-association-insertion-traversal' => 'siblings',
                             'data-association-insertion-node' => ".#{association}",
                             'data-association-insertion-method' => 'append' do
