@@ -35,4 +35,9 @@ namespace :deploy do
       run "cd #{current_path} && bundle exec thin #{t} -C #{thin_config}"
     end
   end
+
+  task :restart do
+    stop
+    start
+  end
 end
