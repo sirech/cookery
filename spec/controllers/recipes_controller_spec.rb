@@ -115,12 +115,29 @@ describe RecipesController do
     before(:each) do
       post :create, recipe: attributes
       @existing = assigns(:recipe)
+
+      @existing.steps.each_with_index do |step, i|
+        attributes[:steps_attributes]["#{i}"]['id'] = step.id
+
+        step.quantities.each_with_index do |quantity, j|
+          attributes[:steps_attributes]["#{i}"]['quantities_attributes']["#{j}"]['id'] = quantity.id
+        end
+      end
     end
 
     it 'removes categories' do
       expect(@existing.categories).not_to be_empty
       put :update, id: @existing.id, recipe: attributes.tap { |attr| attr[:category_ids] = [] }
       expect(assigns(:recipe).categories).to be_empty
+    end
+
+    it 'removes steps if they are marked' do
+      step_name = attributes[:steps_attributes]['0']['name']
+      attributes[:steps_attributes]['0']['_destroy'] = '1'
+
+      put :update, id: @existing.id, recipe: attributes
+
+      expect(assigns(:recipe).steps.map(&:name)).to eq(@existing.steps.map(&:name) - [step_name])
     end
   end
 end
