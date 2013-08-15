@@ -62,7 +62,6 @@
               url: 'http://gdata.youtube.com/feeds/api/videos/' + video_id(video) + '?v=2&alt=json-in-script',
               dataType: 'jsonp'})
               .done(function(data, status, xhr) {
-                console.log($(this));
                 output.html(data.entry.title.$t);
               });
           }
