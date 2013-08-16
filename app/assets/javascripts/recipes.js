@@ -4,6 +4,7 @@
     return {
       track: function(parent) {
         $(parent).find(trigger_field).on('cocoon:after-insert', function(e, insertedItem) {
+          console.log("Tracking: " + insertedItem);
           callback(insertedItem);
         });
       }
@@ -23,10 +24,13 @@
         names.push(ingredient.name);
         ingredients[ingredient.name] = ingredient;
       });
+
+      console.log("Ingredients loaded via ajax");
     });
 
     return {
       activate: function(ancestor) {
+        console.log("Activating picker: " + ancestor);
         $(ancestor).find(field_to_watch).typeahead({
           source: names,
           updater: function(item) {
@@ -71,14 +75,22 @@
   };
 
   $(function() {
+    console.log("Starting load process");
     $('*[rel=tooltip]').tooltip();
+
+    console.log("Tooltip loaded");
 
     // Typeahead for existing ingredients
     var picker = picker_start('.ingredient_picker', '.ingredient_picker_id');
     picker.activate('.quantity');
+
+    console.log("Picker activated");
+
     // For new ingredients
     var find_ingredients = tracker('.quantities-container', picker.activate);
     find_ingredients.track('.steps-container');
+
+    console.log("Ingredients tracked");
 
     // Now the tricky part: When a step is added, we have to complete
     // the ingredient that appears as part of the step and also check
@@ -89,6 +101,9 @@
     });
     find_steps.track('body');
 
+    console.log("Steps tracked");
+
     video_info('.video .video-input', '.video-output').activate();
+    console.log("Finished load process");
   });
 })();
