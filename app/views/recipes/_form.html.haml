@@ -1,6 +1,6 @@
 = simple_form_for @recipe, html: { multipart: true } do |f|
 
-  .row-fluid.boxed.shadow.presentation
+  %fieldset.row-fluid.boxed.shadow.presentation
     .span4.pictures-container
 
       = add_association_button f, :pictures
@@ -11,7 +11,7 @@
     .span8
       .row-fluid
         .span8
-          = f.input :name
+          = f.input :name, autofocus: true
         .span4
           = duration_tag(@recipe.duration)
       .row-fluid
