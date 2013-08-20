@@ -11,8 +11,8 @@
       %i.icon-remove
       Remove Recipe
 
-.container-fluid
-  .row-fluid.boxed.shadow.presentation
+%section.container-fluid
+  %header.row-fluid.boxed.shadow.presentation
     .span4
       - if @recipe.pictures.length > 1
         #carousel.carousel.slide
@@ -51,12 +51,12 @@
         %h4 Difficulty
         = difficulty_tag(@recipe.difficulty)
 
-  .boxed.shadow.accordion.steps-container
+  %section.boxed.shadow.accordion.steps-container
     %h2 Steps
     %hr
 
     - @recipe.steps.each_with_index do |step,index|
-      .row-fluid.boxed.shadow.accordion-group.step
+      %section.row-fluid.boxed.shadow.accordion-group.step
         .accordion-heading
           = duration_tag(step.duration)
           = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do
@@ -79,7 +79,7 @@
                 = simple_format(step.notes)
 
   - if @recipe.videos.any?
-    .boxed.shadow.videos-container
+    %footer.boxed.shadow.videos-container
       %h2 Videos
       %hr
 
