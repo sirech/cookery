@@ -70,6 +70,18 @@
     };
   };
 
+  var duration_converter = function(field) {
+
+    return {
+      change: function() {
+        $(field).each(function(i, elem) {
+          var seconds = elem.value;
+          elem.value = seconds / 60;
+        });
+      }
+    };
+  };
+
   $(function() {
     $('*[rel=tooltip]').tooltip();
 
@@ -90,5 +102,7 @@
     find_steps.track('body');
 
     video_info('.video .video-input', '.video-output').activate();
+
+    duration_converter('.duration-input').change();
   });
 })();
