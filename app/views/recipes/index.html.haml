@@ -1,24 +1,20 @@
 = content_for :well do
-  %h1 Recipes
 
   - if params[:search]
     %div= "Displaying search results for *#{params[:search]}*"
 
-%ul.thumbnails
-  - @recipes.each do |recipe|
-    %li.span3
-      = link_to recipe, class: 'thumbnail boxed shadow' do
-        = main_picture_tag recipe
-        %div.caption
-          %h3= recipe.name
-          %div.row-fluid
-            .span4
-              = difficulty_tag recipe.difficulty
-            .span8
-              = duration_tag(recipe.duration, class: 'small-duration')
-          %div.row-fluid
-            - recipe.categories.each do |category|
-              %span.badge.badge-info= category.name
+  .row-fluid
+    .span8
+      %h1 Recipes
+    .span4
+      .btn-group.pull-right
+        = link_to recipes_path(view: 'detail'), class: "btn #{'active' unless params[:view] == 'list'}" do
+          %i.icon-th-large
+        = link_to recipes_path(view: 'list'), class: "btn #{'active' if params[:view] == 'list'}" do
+          %i.icon-th-list
+
+- view = params[:view] == 'list' ? 'list_view' : 'detail_view'
+= render view, recipes: @recipes
 
 %br
 

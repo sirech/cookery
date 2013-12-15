@@ -1,0 +1,15 @@
+%ul.thumbnails
+  - recipes.each do |recipe|
+    %li.span3
+      = link_to recipe, class: 'thumbnail boxed shadow' do
+        = main_picture_tag recipe
+        %div.caption
+          %h3= recipe.name
+          %div.row-fluid
+            .span4
+              = difficulty_tag recipe.difficulty
+            .span8
+              = duration_tag(recipe.duration, class: 'small-duration')
+          %div.row-fluid
+            - recipe.categories.each do |category|
+              %span.badge.badge-info= category.name

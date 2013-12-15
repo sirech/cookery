@@ -1,0 +1,4 @@
+%table.table.table-striped
+  - recipes.each do |recipe|
+    %tr
+      %td= link_to recipe.name, recipe
