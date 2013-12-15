@@ -140,4 +140,11 @@ describe RecipesController do
       expect(assigns(:recipe).steps.map(&:name)).to eq(@existing.steps.map(&:name) - [step_name])
     end
   end
+
+  describe 'search' do
+    it 'returns only the recipes that match the search query' do
+      get :search, search: 'huevo'
+      expect(assigns(:recipes).map(&:name)).to eq(['huevo frito'])
+    end
+  end
 end

@@ -3,7 +3,11 @@ Cookery::Application.routes.draw do
 
   root 'recipes#index'
 
-  resources :recipes
+  resources :recipes do
+    collection do
+      get 'search'
+    end
+  end
 
   resources :categories, only: ['create']
 

@@ -1,6 +1,9 @@
 = content_for :well do
   %h1 Recipes
 
+  - if params[:search]
+    %div= "Displaying search results for *#{params[:search]}*"
+
 %ul.thumbnails
   - @recipes.each do |recipe|
     %li.span3

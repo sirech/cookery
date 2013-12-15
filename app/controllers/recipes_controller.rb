@@ -46,6 +46,12 @@ class RecipesController < ApplicationController
     end
   end
 
+  def search
+    authorize! :index, Recipe
+    @recipes = Recipe.where('name like ?', "%#{params[:search]}%").order(sort_parameters).page(params[:page])
+    render 'index.html'
+  end
+
   # DELETE /recipes/1
   def destroy
     @recipe.destroy
