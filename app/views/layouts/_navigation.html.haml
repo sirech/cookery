@@ -25,7 +25,7 @@
   %ul.nav.pull-right
     - if user_signed_in?
       %li
-        Signed as #{current_user.email}
+        = link_to "#{current_user.email}", '#'
       %li
         = link_to 'Sign out', destroy_user_session_path, method: :delete
     - else
