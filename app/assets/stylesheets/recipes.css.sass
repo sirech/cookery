@@ -1,3 +1,5 @@
+@import "bootstrap/_mixins"
+
 // Index
 
 @mixin left-break
@@ -23,6 +25,14 @@ ul.thumbnails
 
     &.span1:nth-child(12n + 13)
       @include left-break
+
+  .caption
+
+    h3
+      @include text-overflow
+
+    .badge-row
+      height: 20px
 
 .well
   .btn-group

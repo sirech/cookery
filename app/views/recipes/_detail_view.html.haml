@@ -10,6 +10,6 @@
               = difficulty_tag recipe.difficulty
             .span8
               = duration_tag(recipe.duration, class: 'small-duration')
-          %div.row-fluid
+          %div.badge-row.row-fluid
             - recipe.categories.each do |category|
               %span.badge.badge-info= category.name
