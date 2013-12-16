@@ -1,6 +1,5 @@
 class Step < ActiveRecord::Base
   belongs_to :recipe
-  acts_as_list scope: :recipe
 
   has_many :quantities
   accepts_nested_attributes_for :quantities, reject_if: :all_blank, allow_destroy: true

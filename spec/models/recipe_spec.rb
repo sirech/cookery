@@ -34,12 +34,6 @@ describe Recipe do
     it 'should return the steps in the recipe taking into account their order' do
       expect(recipe.steps.map(&:name)).to eq(%w(prepare cook rest))
     end
-
-    it 'should be possible to change the order' do
-      recipe.steps.first.move_to_bottom
-      recipe.reload
-      expect(recipe.steps.map(&:name)).to eq(%w(cook rest prepare))
-    end
   end
 
   describe '#duration' do

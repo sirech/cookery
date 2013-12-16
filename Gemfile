@@ -36,9 +36,6 @@ gem 'cocoon', '~> 1.2.0'
 # Add foreign keys in migrations
 gem 'foreigner'
 
-# Add ordered lists
-gem 'acts_as_list'
-
 # Authorization
 gem 'devise', '3.0.0.rc'
 gem 'cancan', '~> 1.6'

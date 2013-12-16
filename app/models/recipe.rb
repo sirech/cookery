@@ -10,7 +10,7 @@ class Recipe < ActiveRecord::Base
   has_many :pictures, dependent: :destroy
   accepts_nested_attributes_for :pictures
 
-  has_many :steps, -> { order('position') }
+  has_many :steps
   accepts_nested_attributes_for :steps, reject_if: :all_blank, allow_destroy: true
 
   has_many :videos
