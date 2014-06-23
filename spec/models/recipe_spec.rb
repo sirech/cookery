@@ -59,4 +59,11 @@ describe Recipe do
       expect(recipe.videos).to have(2).items
     end
   end
+
+  describe '#servings' do
+    it 'should only accept positive numbers' do
+      recipe.servings = 0
+      expect(recipe.valid?).to be_false
+    end
+  end
 end

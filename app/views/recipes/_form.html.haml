@@ -19,6 +19,8 @@
         = text_field_tag :'extra-category', nil, placeholder: 'Extra: Category1, Category2, Category3', class: 'controls string', rel: 'tooltip', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'data-original-title' => 'Add extra categories by writing them here'
       .row-fluid
         = f.input :difficulty, collection: Recipe.difficulty_levels, default: 1
+      .row-fluid
+        = f.input :servings, default: 1
 
   .boxed.shadow.steps-container
     %h2 Steps

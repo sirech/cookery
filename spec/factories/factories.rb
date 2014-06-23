@@ -70,6 +70,7 @@ FactoryGirl.define do
     author { FactoryGirl.create(:user) }
     sequence(:name) { |n| "Recipe[#{n}]" }
     difficulty 'medium'
+    servings 2
 
     categories { FactoryGirl.create_list(:category, 3) }
 

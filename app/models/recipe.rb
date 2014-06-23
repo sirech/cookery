@@ -5,6 +5,8 @@ class Recipe < ActiveRecord::Base
   belongs_to :author, class_name: User, foreign_key: 'user_id'
   validates_presence_of :author
 
+  validates_numericality_of :servings, greater_than: 0
+
   has_and_belongs_to_many :categories
 
   has_many :pictures, dependent: :destroy
