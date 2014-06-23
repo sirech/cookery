@@ -50,6 +50,8 @@
       .row-fluid
         %h4 Difficulty
         = difficulty_tag(@recipe.difficulty)
+      .row-fluid
+        %h4= "Servings: #{@recipe.servings}"
 
   %section.boxed.shadow.accordion.steps-container
     %h2 Steps
