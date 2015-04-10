@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rake', '~> 10.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.0'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -25,10 +25,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'kaminari'
 
 # Image uploading
-gem 'paperclip', '~> 3.0'
+gem 'paperclip', '~> 4.2'
 
 # Forms
-gem 'simple_form', '~> 3.0.0.rc'
+gem 'simple_form', '~> 3.1.0'
 gem 'cocoon', '~> 1.2.0'
 
 ### DB
@@ -37,7 +37,7 @@ gem 'cocoon', '~> 1.2.0'
 gem 'foreigner'
 
 # Authorization
-gem 'devise', '3.0.0.rc'
+gem 'devise', '~> 3.4.0'
 gem 'cancan', '~> 1.6'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -77,7 +77,7 @@ end
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
+gem 'capistrano', '~> 2.15.0', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
