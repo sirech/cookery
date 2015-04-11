@@ -19,11 +19,8 @@
 
     %section#main{ role: 'main' }
       %section.container-fluid
-        %section.content
-          .row-fluid
-            .span12
-              = render 'layouts/messages'
-              = render 'layouts/well'
-              = yield
+        = render 'layouts/messages'
+        = render 'layouts/well'
+        = yield
 
-          %footer
+        %footer
