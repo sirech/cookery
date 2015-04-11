@@ -47,13 +47,13 @@ ul.thumbnails
 
 @mixin boxed($border, $border-radius, $margin-vertical)
   @include box-sizing(border-box)
-  border: $border solid $grayLight
-  @include border-radius($border-radius)
+  border: $border solid $gray-light
+  border-radius: $border-radius
   padding: 15px
   @include margin-vertical($margin-vertical)
 
 .shadow
-  @include box-shadow(inset 0 0 2px $grayDark)
+  @include box-shadow(inset 0 0 2px $gray-dark)
 
 .boxed
   @include boxed(2px, 15px, 15px)
@@ -69,10 +69,10 @@ ul.thumbnails
     width: 300px
 
 .steps-container
-  background: $grayLighter
+  background: $gray-lighter
 
   .step
-    background: $white
+    background: #000
 
 .ingredients
   .ingredient
@@ -83,17 +83,17 @@ ul.thumbnails
       float: right
 
 .videos-container
-  background: $grayLighter
+  background: $gray-lighter
 
   .video
-    background: $white
+    background: #000
 
     .video-input:
       margin-right: 10px
 
 // General
 .duration
-  background: $grayLighter
+  background: $gray-lighter
   max-width: 170px
   i
     margin-left: 2px
