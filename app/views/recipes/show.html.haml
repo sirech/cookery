@@ -33,39 +33,40 @@
       .row
         %h4= "Servings: #{@recipe.servings}"
 
-  %section.boxed.shadow.accordion.steps-container
+  %section.row.boxed.shadow.accordion.steps-container
     %h2 Steps
     %hr
 
     - @recipe.steps.each_with_index do |step,index|
-      %section.row.boxed.shadow.accordion-group.step
-        .accordion-heading
-          = duration_tag(step.duration)
-          = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do
-            %h3= step.name
+      %section.boxed.shadow.accordion-group.step
+        .row.accordion-heading
+          .col-md-8
+            = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do
+              %h3= step.name
+          .col-md-4.hidden-xs= duration_tag(step.duration)
 
-        .collapse.accordion-body.in{ id: "collapse#{index}" }
+        .row.collapse.accordion-body.in{ id: "collapse#{index}" }
           .accordion-inner
-            .span6
+            .col-md-6.col-sm-6
               - if step.quantities.any?
                 %h4 Ingredients
-                %ul.ingredients
-                  - step.quantities.each do |quantity|
-                    %li.ingredient
-                      %span= quantity.ingredient.name
-                      - if quantity.unit.present?
-                        = amount_tag(quantity.amount, quantity.unit)
-            .span6
+                - step.quantities.each do |quantity|
+                  .row.ingredient
+                    .col-md-6.col-sm-6.col-xs-6= quantity.ingredient.name
+                    - if quantity.unit.present?
+                      .col-md-6.col-sm-6.col-xs-6= amount_tag(quantity.amount, quantity.unit)
+
+            .col-md-6.col-sm-6
               - if step.notes.present?
                 %h4 Notes
                 = simple_format(step.notes)
 
   - if @recipe.videos.any?
-    %footer.boxed.shadow.videos-container
+    %section.row.boxed.shadow.videos-container
       %h2 Videos
       %hr
 
       %ul.thumbnails
         - @recipe.videos.each do |video|
-          %li.boxed.video
-            = youtube_video video.url
+          %li.col-md-4.col-sm-6
+            .boxed.video= youtube_video video.url

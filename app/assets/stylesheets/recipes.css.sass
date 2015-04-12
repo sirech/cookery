@@ -38,7 +38,6 @@ ul.thumbnails
   margin-bottom: $margin
 
 @mixin boxed($border, $border-radius, $margin-vertical)
-  @include box-sizing(border-box)
   border: $border solid $gray-light
   border-radius: $border-radius
   padding: 15px
@@ -67,29 +66,45 @@ ul.thumbnails
   background: $gray-lighter
 
   .step
-    background: #000
+    background: #FFF
 
-.ingredients
-  .ingredient
-    width: 250px
+    a.accordion-toggle
+      text-decoration: none
 
-    .amount
-      font-style: italic
-      float: right
+.ingredient
+  margin-bottom: 0
+
+  > :first-child
+    text-align: left
+    word-wrap: break-word
+
+  > :last-child
+    text-align: right
+    font-style: italic
 
 .videos-container
   background: $gray-lighter
 
+  li
+    text-align: center
+
   .video
-    background: #000
+    display: inline-block
+    background: #FFF
+
+    iframe
+      @include square(200px)
+
+      @media (min-width: $screen-sm-min)
+        @include square(250px)
+
+      @media (min-width: $screen-lg-min)
+        @include square(300px)
 
     .video-input:
       margin-right: 10px
 
 // General
-.picture
-  border-radius: 5px
-
 .duration
   background: $gray-lighter
   max-width: 170px
