@@ -1,0 +1,22 @@
+- if @recipe.pictures.length > 1
+  #carousel.carousel.slide
+    -# Pointers
+    %ol.carousel-indicators
+      - @recipe.pictures.each_index do |index|
+        %li{ 'data-target' => '#carousel', 'data-slide-to' => "#{index}", class: ('active' if index == 0) }
+
+    -# Pictures
+    .carousel-inner
+      - @recipe.pictures.each_with_index do |picture, index|
+        .item{ class: ('active' if index == 0) }
+          = picture_tag picture
+          - if picture.caption.present?
+            .carousel-caption
+              %h4= picture.caption
+    -# Arrows
+    = link_to '#carousel', class: 'carousel-control left', 'data-slide' => 'prev' do
+      %span.glyphicon.glyphicon-chevron-left
+    = link_to '#carousel', class: 'carousel-control right', 'data-slide' => 'next' do
+      %span.glyphicon.glyphicon-chevron-right
+- else
+  = main_picture_tag @recipe

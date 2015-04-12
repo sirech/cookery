@@ -4,53 +4,33 @@
 = content_for :well do
   - if can? :edit, Recipe
     = link_to edit_recipe_path(@recipe), class: 'btn btn-large btn-primary' do
-      %i.icon-edit.icon-white
+      %i.glyphicon.glyphicon-edit.icon-white
       Edit Recipe
   - if can? :destroy, Recipe
     = link_to recipe_path(@recipe), method: :delete, confirm: 'Are you sure?', class: 'btn btn-large btn-danger' do
-      %i.icon-remove
+      %i.glyphicon.glyphicon-remove
       Remove Recipe
 
 %section.container-fluid
-  %header.row-fluid.boxed.shadow.presentation
-    .span4
-      - if @recipe.pictures.length > 1
-        #carousel.carousel.slide
-          -# Pointers
-          %ol.carousel-indicators
-            - @recipe.pictures.each_index do |index|
-              %li{ 'data-target' => '#carousel', 'data-slide-to' => "#{index}", class: ('active' if index == 0) }
-          -# Pictures
-          .carousel-inner
-            - @recipe.pictures.each_with_index do |picture, index|
-              .item{ class: ('active' if index == 0) }
-                = picture_tag picture
-                - if picture.caption.present?
-                  .carousel-caption
-                    %h4= picture.caption
-          -# Arrows
-          = link_to '#carousel', class: 'carousel-control left', 'data-slide' => 'prev' do
-            &lsaquo;
-          = link_to '#carousel', class: 'carousel-control right', 'data-slide' => 'next' do
-            &rsaquo;
-      - else
-        = main_picture_tag @recipe
+  .row.boxed.shadow.presentation
+    .col-md-4.col-sm-6
+      = render 'picture'
 
-    .span8
-      .row-fluid
-        .span8
-          %h1= @recipe.name
-        .span4
+    .col-md-8.col-sm-6
+      .row
+        .col-md-8.col-sm-7
+          %h2.title= @recipe.name
+        .col-md-4.col-sm-5.hidden-xs
           = duration_tag(@recipe.duration)
-      .row-fluid
+      .row
         - if @recipe.categories.any?
           %h4 Categories
           - @recipe.categories.each do |category|
-            %span.badge.badge-info= category.name
-      .row-fluid
+            %span.label.label-info= category.name
+      .row
         %h4 Difficulty
         = difficulty_tag(@recipe.difficulty)
-      .row-fluid
+      .row
         %h4= "Servings: #{@recipe.servings}"
 
   %section.boxed.shadow.accordion.steps-container
@@ -58,7 +38,7 @@
     %hr
 
     - @recipe.steps.each_with_index do |step,index|
-      %section.row-fluid.boxed.shadow.accordion-group.step
+      %section.row.boxed.shadow.accordion-group.step
         .accordion-heading
           = duration_tag(step.duration)
           = link_to "#collapse#{index}", class: 'accordion-toggle', 'data-toggle' => 'collapse' do

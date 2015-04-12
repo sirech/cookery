@@ -4,7 +4,7 @@ module RecipesHelper
   end
 
   def picture_tag(picture, size = :medium)
-    image_tag picture.photo.url(size)
+    image_tag picture.photo.url(size), class: 'picture img-responsive'
   end
 
   def difficulty_tag(difficulty, options = {})

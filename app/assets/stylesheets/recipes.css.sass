@@ -19,9 +19,6 @@ ul.thumbnails
 
     padding: 10px
 
-  img
-    border-radius: 5px
-
   .caption
 
     h3
@@ -57,11 +54,14 @@ ul.thumbnails
   @include boxed(2px, 10px, 0px)
 
 .presentation
-  .row-fluid
+  .row
     margin-bottom: 10px
 
   #carousel
     width: 300px
+
+  .title
+    @include text-overflow
 
 .steps-container
   background: $gray-lighter
@@ -87,6 +87,9 @@ ul.thumbnails
       margin-right: 10px
 
 // General
+.picture
+  border-radius: 5px
+
 .duration
   background: $gray-lighter
   max-width: 170px
