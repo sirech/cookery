@@ -1,4 +1,5 @@
 %table.table.table-striped
   - recipes.each do |recipe|
-    %tr
-      %td= link_to recipe.name, recipe
+    %tr{ 'data-link' => recipe_path(recipe)}
+      %td= main_picture_tag recipe, :thumb
+      %td.btn-link= recipe.name
