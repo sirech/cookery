@@ -12,12 +12,12 @@ module RecipesHelper
     to_label = {
       'easy' => 'success',
       'medium' => 'warning',
-      'difficult' => 'important'
+      'difficult' => 'danger'
     }
     to_icon = {
-      'easy' => 'icon-white icon-thumbs-up',
+      'easy' => 'glyphicon glyphicon-thumbs-up',
       'medium' => '',
-      'difficult' => 'icon-white icon-thumbs-down'
+      'difficult' => 'glyphicon glyphicon-thumbs-down'
     }
 
     content_tag(:span, class: "difficulty label label-#{to_label[difficulty]} #{options[:class]}") do
@@ -38,7 +38,7 @@ module RecipesHelper
     options = { class: '' }.merge(options)
     content_tag(:div, class: "duration small-boxed pull-right #{options[:class]}") do
       content_tag(:span, distance_of_time_in_words(duration)) +
-      content_tag(:i, '', class: 'icon-time')
+      content_tag(:i, '', class: 'glyphicon glyphicon-time')
     end
   end
 

@@ -1,3 +1,4 @@
+@import 'bootstrap'
 @import "bootstrap/_mixins"
 
 // Index
@@ -7,40 +8,34 @@
   clear: left
 
 ul.thumbnails
-  li
-    &.span12 + li
-      @include left-break
+  list-style-type: none
+  padding-left: 0
 
-    &.span6:nth-child(2n + 3)
-      @include left-break
+  .thumbnail
+    @include box-sizing(border-box)
 
-    &.span4:nth-child(3n + 4)
-      @include left-break
+    border: 2px solid $gray-light
+    border-radius: 10px
 
-    &.span3:nth-child(4n + 5)
-      @include left-break
+    padding: 10px
 
-    &.span2:nth-child(6n + 7)
-      @include left-break
-
-    &.span1:nth-child(12n + 13)
-      @include left-break
+  img
+    border-radius: 5px
 
   .caption
 
     h3
       @include text-overflow
 
-    .badge-row
-      height: 20px
+    .categories-row
+      margin-top: 5px
+      min-height: 20px
 
 .well
   .btn-group
     margin-top: 15px
 
 // SHOW
-@import 'bootstrap'
-
 @mixin margin-vertical($margin)
   margin-top: $margin
   margin-bottom: $margin
@@ -59,7 +54,7 @@ ul.thumbnails
   @include boxed(2px, 15px, 15px)
 
 .small-boxed
-  @include boxed(2px, 15px, 0px)
+  @include boxed(2px, 10px, 0px)
 
 .presentation
   .row-fluid
@@ -103,7 +98,7 @@ ul.thumbnails
 
 .difficulty
   i
-    margin-left: 2px
+    margin-left: 4px
 
 .short-input
   width: 103px
