@@ -58,6 +58,13 @@ group :development do
   gem 'rb-fsevent', :require => false
 end
 
+# Robe
+group :development do
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'method_source'
+end
+
 # Testing
 group :development do
   gem 'web-console'
