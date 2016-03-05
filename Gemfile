@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'rake', '~> 10.1.0'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 
@@ -48,7 +46,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Guard
+# Development
 group :development do
   gem 'guard'
   gem 'guard-bundler'
@@ -56,18 +54,9 @@ group :development do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'rb-fsevent', :require => false
-end
 
-# Robe
-group :development do
-  gem 'pry'
+  gem 'pry-rails'
   gem 'pry-doc'
-  gem 'method_source'
-end
-
-# Testing
-group :development do
-  gem 'web-console'
 end
 
 group :test do
@@ -81,14 +70,5 @@ group :production do
   gem 'pg'
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
 # Use Capistrano for deployment
 gem 'capistrano', '~> 2.15.0', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
