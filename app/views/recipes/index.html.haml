@@ -7,15 +7,10 @@
   .row
     .col-md-8.col-sm-8.col-xs-6
       %h2= "Recipes"
-    .col-md-4.col-sm-4.col-xs-6
-      .btn-group.pull-right
-        = link_to recipes_path(view: 'detail'), class: "btn btn-default #{'active' unless params[:view] == 'list'}" do
-          %i.glyphicon.glyphicon-th-large
-        = link_to recipes_path(view: 'list'), class: "btn btn-default #{'active' if params[:view] == 'list'}" do
-          %i.glyphicon.glyphicon-th-list
 
-- view = params[:view] == 'list' ? 'list_view' : 'detail_view'
-= render view, recipes: @recipes
+.row
+  .col-md-8.col-xs-12
+    = render 'list_view', recipes: @recipes
 
 %br
 

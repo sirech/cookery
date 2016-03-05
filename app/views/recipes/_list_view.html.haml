@@ -1,5 +1,8 @@
-%table.table.table-striped
+%ul.list-unstyled
   - recipes.each do |recipe|
-    %tr{ 'data-link' => recipe_path(recipe)}
-      %td= main_picture_tag recipe, :thumb
-      %td.btn-link= recipe.name
+    %li
+      .row{ 'data-link' => recipe_path(recipe)}
+        .col-sm-2.col-xs-3
+          = main_picture_tag recipe, :thumb
+        .col-sm-10.col-xs-9
+          %h4.btn-link= recipe.name
