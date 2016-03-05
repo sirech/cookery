@@ -17,8 +17,8 @@
       .container-fluid
         = render 'layouts/navigation'
 
-    %section#main{ role: 'main' }
-      %section.container-fluid
+    %section#main{ role: 'main', class: "#{content_for?(:main_css) ? yield(:main_css) : ''}" }
+      .container-fluid
         = render 'layouts/messages'
         = render 'layouts/well'
         = yield
